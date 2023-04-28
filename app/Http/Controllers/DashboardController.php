@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Warga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class DashboardController extends Controller
 {
@@ -30,6 +31,10 @@ class DashboardController extends Controller
             'jenis_kelamin' => 'required',
             'tanggal_lahir' => 'required'
         ]);
+        $file = $request->file('foto');
+        $name = $file->hashName();
+        $data['foto'] = $name;
+        $file->move(public_path('img'), $name);
         $data['tanggal_lahir'] = date('d-m-Y', strtotime($request->input('tanggal_lahir')));
         Warga::create($data);
         return redirect()->route('dashboard');
@@ -43,16 +48,26 @@ class DashboardController extends Controller
     {
         // dd($re->all());
         $data = [];
-        if ($re->filled('foto')) {
+        if ($re->has('foto')) {
+            
             $data = $re->validate([
                 'nama' => 'max:255',
-                'foto' => 'max:255',
+                'foto' => 'mimes:jpeg,png,jpg',
                 'nikah' => 'max:255',
                 'jenis_kelamin' => 'max:255',
                 'tanggal_lahir' => 'max:255'
             ]);
+            $a = Warga::find($re->id);
+            if (File::exists(public_path('img/' . $a->foto))) {
+                unlink(public_path('img/' . $a->foto));
+            }
+            $file = $re->file('foto');
+            $name = $file->hashName();
+            $data['foto'] = $name;
+            $file->move(public_path('img'), $name);
         }
         else {
+            
             $data = $re->validate([
                 'nama' => 'max:255',
                 'nikah' => 'max:255',
@@ -67,5 +82,18 @@ class DashboardController extends Controller
         $warga = Warga::find($re->id);
         $warga->update($data);
         return redirect('/dashboard')->with('msg', 'Berhasil update');
+    }
+    public function hapuswarga($id)
+    {
+        if (Warga::where('id', $id)->count() > 0) {
+            $data = Warga::find($id);
+            if (File::exists(public_path('img/' . $data->foto))) {
+                unlink(public_path('img/' . $data->foto));
+            }
+            $data->delete();
+            return redirect()->route('dashboard');
+        }
+        return redirect()->route('dashboard');
+        
     }
 }

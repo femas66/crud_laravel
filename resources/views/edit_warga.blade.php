@@ -1,9 +1,11 @@
 @extends('layout.master')
 @section('content')
-    <form action="{{ route('editwarga') }}" method="post">
+    <form action="{{ route('editwarga') }}" method="post" enctype="multipart/form-data">
       @csrf
       <input type="hidden" name="id" value="{{ $warga->id }}">
       <input type="text" name="nama" id="" required value="{{ $warga->nama }}">
+      <hr>
+      <img src="/img/{{ $warga->foto }}" width="100" height="100" alt=""><br>
       <input type="file" name="foto" id="">
       <hr>
       <input type="radio" name="nikah" id="" value="Y" id="ya" {{ $warga->nikah == 'Y' ? "checked" : "" }}>

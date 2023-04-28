@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PekerjaanController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,4 +21,13 @@ Route::group(['middleware' => 'cekLogin'], function () {
     Route::post('/tambahwarga', [DashboardController::class, 'actiontambahwarga'])->name('actiontambahwarga');
     Route::get('/editwarga/{id}', [DashboardController::class, 'editwarga']);
     Route::post('/editwarga/store', [DashboardController::class, 'actioneditwarga'])->name('editwarga');
+    Route::get('/hapuswarga/id/{id}', [DashboardController::class, 'hapuswarga']);
+
+    // Halaman pekerjaan
+    Route::get('/pekerjaan', [PekerjaanController::class, 'index'])->name('pekerjaan.index');
+    Route::get('/pekerjaan/create', [PekerjaanController::class, 'create'])->name('pekerjaan.create');
+    Route::post('/pekerjaan', [PekerjaanController::class, 'store'])->name('pekerjaan.store');
+    Route::get('/pekerjaan/{id}/edit', [PekerjaanController::class, 'edit'])->name('pekerjaan.edit');
+    Route::put('/pekerjaan/{id}', [PekerjaanController::class, 'update'])->name('pekerjaan.update');
+    Route::delete('/pekerjaan/{id}', [PekerjaanController::class, 'delete'])->name('pekerjaan.delete');
 });

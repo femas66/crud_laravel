@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('content')
-    <form action="{{ route('actiontambahwarga') }}" method="post">
+    <form action="{{ route('actiontambahwarga') }}" method="post" enctype="multipart/form-data">
       @csrf
       <input type="text" name="nama" id="" required>
       <input type="file" name="foto" id="" required>
