@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <style>
-        body {
-            font-weight: bold;
-        }
-    </style>
-    <link rel="icon" type="image/x-icon" href="img/logo.ico">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,7 +8,7 @@
     <meta name="author" content="">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>CRUD</title>
-
+    <link rel="icon" type="image/x-icon" href="img/logo.ico">
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -32,41 +25,39 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: #37306B;">
-            <hr class="sidebar-divider my-0">
+      <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: #37306B;">
+        <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="/dashboard">
-                <i class="fa-solid fa-person"></i>
-                    <span>Data Warga</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/pekerjaan">
-                <i class="fa-solid fa-sack-dollar"></i>
-                    <span>Data Pekerjaan</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/hobi">
-                <i class="fa-solid fa-gamepad"></i>
-                    <span>Data Hobi</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/vaksin">
-                <i class="fa-solid fa-syringe"></i>
-                    <span>Data Vaksin</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/agama">
-                <i class="fa-solid fa-person-praying"></i>
-                    <span>Data Agama</span></a>
-            </li>           
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div> 
-        </ul>
-        <!-- End of Sidebar -->
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+            <a class="nav-link" href="/dashboard">
+            <i class="fa-solid fa-person"></i>
+                <span>Data Warga</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="/pekerjaan">
+            <i class="fa-solid fa-sack-dollar"></i>
+                <span>Data Pekerjaan</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="/hobi">
+            <i class="fa-solid fa-gamepad"></i>
+                <span>Data Hobi</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="/vaksin">
+            <i class="fa-solid fa-syringe"></i>
+                <span>Data Vaksin</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="/agama">
+            <i class="fa-solid fa-person-praying"></i>
+                <span>Data Agama</span></a>
+        </li>           
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div> 
+    </ul>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -77,7 +68,6 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-                
                 <h1 style="font-weight: bold; color:black;">Dashboard</h1>
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -112,11 +102,10 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">         
-                    <!-- Page Heading -->
+                <div class="container-fluid">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary"><a href="{{ route('tambahwarga') }}" class="btn" style="background: #37306B; font-weight: bold; color:white; border-radius: 18px;"><i class="fa-solid fa-plus"></i> Tambah Data Warga</a></h6>
+                        <h6 class="m-0 font-weight-bold text-primary"><a href="{{ route('hobi.create') }}" class="btn" style="background: #37306B; font-weight: bold; color:white; border-radius: 18px;"><i class="fa-solid fa-plus"></i> Tambah Data Hobi</a></h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -124,38 +113,48 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th style="width: 100px;">Foto</th>
                                             <th>Nama</th>
-                                            <th>Status nikah</th>
-                                            <th>Jenis Kelamin</th>
-                                            <th>Tanggal Lahir</th>
+                                            <th>Usia</th>
+                                            <th>Hobi</th>
                                             <th colspan="2"><center>Aksi</center></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                      @php
-                                        $i = 1;
-                                      @endphp
-                                      @foreach ($wargas as $warga)
-                                      <tr>
-                                        <td>{{ $i++ }}</td>
-                                        <td><img src="/img/{{ $warga->foto }}" alt="" srcset="" width="80" height="80"></td>
-                                        <td>{{ $warga->nama }}</td>
-                                        <td>{{ ($warga->nikah == 'Y') ? "Sudah menikah" : "Belum menikah" }}</td>
-                                        <td>{{ ($warga->jenis_kelamin == 'L') ? "Laki-Laki" : "Perempuan" }}</td>
-                                        <td>{{ $warga->tanggal_lahir }}</td>
-                                        <th><a href="/editwarga/{{ $warga->id }}">Edit</a></th>
-                                        <th><a href="/hapuswarga/id/{{ $warga->id }}">Hapus</a></th>
-                                      </tr>
-                                      @endforeach
+                                        @php
+                                            $i = 1;
+                                        @endphp
+                                        @foreach ($hobis as $hobi)
+                                            <tr>
+                                                <td>{{ $i++ }}</td>
+                                                <td>{{ $hobi->warga->nama }}</td>
+                                                <td>{{ $hobi->usia }}</td>
+                                                <td>{{ $hobi->hobi }}</td>
+                                                <th><a href="{{ route('hobi.edit', ['id' => $hobi->id]) }}">Edit</a></th>
+                                                <th><form action="{{ route('hobi.delete', ['id' => $hobi->id]) }}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit">Hapus</button>
+                                                </form></th>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
+
+                    
+
                 </div>
+                <!-- /.container-fluid -->
+
             </div>
+            <!-- End of Main Content -->
+
+
         </div>
+        <!-- End of Content Wrapper -->
+
     </div>
     <!-- End of Page Wrapper -->
 
@@ -178,7 +177,7 @@
                 <div class="modal-body">Yakin mau logout?</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{ route('logout') }}" style="color: black;"><b>Logout</b></a>
+                    <a class="btn btn-primary" href="logout.php">Logout</a>
                 </div>
             </div>
         </div>
@@ -200,6 +199,5 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
-
 </body>
 </html>

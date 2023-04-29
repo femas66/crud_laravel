@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pekerjaan_warga', function (Blueprint $table) {
             $table->id();
-            $table->integer('warga_id');
+            $table->foreignId('warga_id')->constrained('warga', 'id');
             $table->string('pekerjaan');
             $table->string('alamat', 255);
             $table->string('gaji');

@@ -9,4 +9,9 @@ class HobiWarga extends Model
 {
     use HasFactory;
     protected $table = 'hobi_warga';
+
+    protected $guarded = ['id'];
+    function warga() {
+        return $this->belongsTo(Warga::class);
+    }
 }

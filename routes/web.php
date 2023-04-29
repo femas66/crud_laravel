@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HobiController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PekerjaanController;
 use App\Http\Controllers\RegisterController;
@@ -30,4 +31,12 @@ Route::group(['middleware' => 'cekLogin'], function () {
     Route::get('/pekerjaan/{id}/edit', [PekerjaanController::class, 'edit'])->name('pekerjaan.edit');
     Route::put('/pekerjaan/{id}', [PekerjaanController::class, 'update'])->name('pekerjaan.update');
     Route::delete('/pekerjaan/{id}', [PekerjaanController::class, 'delete'])->name('pekerjaan.delete');
+
+    //halaman hobi
+    Route::get('/hobi', [HobiController::class, 'index'])->name('hobi.index');
+    Route::get('/hobi/create', [HobiController::class, 'create'])->name('hobi.create');
+    Route::post('/hobi', [HobiController::class, 'store'])->name('hobi.store');
+    Route::get('/hobi/{id}/edit', [HobiController::class, 'edit'])->name('hobi.edit');
+    Route::put('/hobi/{id}', [HobiController::class, 'update'])->name('hobi.update');
+    Route::delete('/hobi/{id}', [HobiController::class, 'delete'])->name('hobi.delete');
 });

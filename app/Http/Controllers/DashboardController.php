@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PekerjaanWarga;
 use App\Models\Warga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -90,6 +91,8 @@ class DashboardController extends Controller
             if (File::exists(public_path('img/' . $data->foto))) {
                 unlink(public_path('img/' . $data->foto));
             }
+            $pekerjaan = PekerjaanWarga::where('warga_id', $data->id);
+            $pekerjaan->delete();
             $data->delete();
             return redirect()->route('dashboard');
         }

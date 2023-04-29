@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('agama_warga', function (Blueprint $table) {
             $table->id();
-            $table->integer('warga_id');
+            $table->foreignId('warga_id')->constrained('warga', 'id');
             $table->enum('agama_sekarang', ['islam', 'kristen', 'konghucu', 'hindu', 'budha']);
             $table->enum('agama_sebelumnya', ['islam', 'kristen', 'konghucu', 'hindu', 'budha']);
             $table->timestamps();

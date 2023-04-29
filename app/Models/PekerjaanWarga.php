@@ -9,4 +9,10 @@ class PekerjaanWarga extends Model
 {
     use HasFactory;
     protected $table = 'pekerjaan_warga';
+    protected $guarded = ['id'];
+
+    public function warga()
+    {
+        return $this->belongsTo(Warga::class);
+    }
 }
