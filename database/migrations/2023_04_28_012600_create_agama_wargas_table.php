@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('agama_warga', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('warga_id')->constrained('warga', 'id');
+            $table->foreignId('warga_id')->constrained('warga', 'id')->onDelete('cascade')->onDelete('cascade');
             $table->string('agama_sekarang');
             $table->string('agama_sebelumnya');
             $table->timestamps();

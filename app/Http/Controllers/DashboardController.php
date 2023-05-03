@@ -94,14 +94,14 @@ class DashboardController extends Controller
             if (File::exists(public_path('img/' . $data->foto))) {
                 unlink(public_path('img/' . $data->foto));
             }
-            $pekerjaan = PekerjaanWarga::where('warga_id', $data->id);
-            $pekerjaan->delete();
-            $hobi = HobiWarga::where('warga_id', $data->id);
-            $hobi->delete();
-            $vaksin = VaksinWarga::where('warga_id', $data->id);
-            $vaksin->delete();
-            $agama = AgamaWarga::where('warga_id', $data->id);
-            $agama->delete();
+            // $pekerjaan = PekerjaanWarga::where('warga_id', $data->id);
+            // $pekerjaan->delete();
+            // $hobi = HobiWarga::where('warga_id', $data->id);
+            // $hobi->delete();
+            // $vaksin = VaksinWarga::where('warga_id', $data->id);
+            // $vaksin->delete();
+            // $agama = AgamaWarga::where('warga_id', $data->id);
+            // $agama->delete();
             $data->delete();
             return redirect()->route('dashboard');
         }

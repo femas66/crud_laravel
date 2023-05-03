@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('vaksin_warga', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('warga_id')->constrained('warga', 'id');
+            $table->foreignId('warga_id')->constrained('warga', 'id')->onDelete('cascade')->onUpdate('cascade');
             $table->string('nik')->unique();
             $table->enum('vaksin', ['Y', 'N']);
             $table->timestamps();
