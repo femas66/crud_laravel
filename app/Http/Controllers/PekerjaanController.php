@@ -20,6 +20,7 @@ class PekerjaanController extends Controller
     }
     public function store(Request $request)
     {
+        // dd($request->all());
         $data = $request->validate([
             'warga_id' => 'required',
             'pekerjaan' => 'required',

@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AgamaWarga extends Model
+class VaksinWarga extends Model
 {
     use HasFactory;
-    protected $table = 'agama_warga';
+    protected $table = 'vaksin_warga';
     protected $guarded = ['id'];
 
     public function warga()

@@ -9,7 +9,7 @@
 @endif
 <div class="container">
 <h3>Tambah data</h3><hr>
-<form action="{{ route('hobi.store') }}" method="post">
+<form action="{{ route('vaksin.store') }}" method="post">
   @csrf
     <div class="mb-3">
       <label for="nama" class="form-label">Nama</label>
@@ -17,16 +17,20 @@
         @foreach ($wargas as $warga)
             <option value="{{ $warga->id }}">{{ $warga->nama }}</option>
         @endforeach
-        
       </select>
     </div>
     <div class="mb-3">
-      <label for="jb" class="form-label">Usia</label>
-      <input type="number" name="usia" placeholder="Usia" class="form-control" id="jb">
+      <label for="jb" class="form-label">NIK</label>
+      <input type="number" name="nik" placeholder="Nik" class="form-control" id="jb">
     </div>
-    <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="floatingInput" placeholder="Hobi" name="hobi">
-      <label for="floatingInput">Hobi</label>
+    <hr>
+    <div class="form-check">
+      <label for="l">Sudah vaksin</label>
+      <input type="radio" name="vaksin" id="l" value="Y" class="form-check-input">
+    </div>
+    <div class="form-check">
+      <label for="p">Belum vaksin</label>
+      <input type="radio" name="vaksin" id="p" value="N" class="form-check-input">
     </div>
     <hr>
     <div class="mb-3">

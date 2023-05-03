@@ -1,12 +1,5 @@
 @extends('layout.halaman')
 @section('body')
-@if ($errors->any())
-    @foreach ($errors->all() as $error)
-        <div class="alert alert-warning" role="alert">
-            {{ $error }}
-        </div>
-    @endforeach
-@endif
     <div id="wrapper">
 
         <!-- Sidebar -->
@@ -53,9 +46,8 @@
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                
                 <h1 style="font-weight: bold; color:black;">Dashboard</h1>
+                
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
@@ -76,7 +68,7 @@
                                 <i class="fa-solid fa-key"></i>
                                     Ganti Password
                                 </a>
-                                <a class="dropdown-item" href="{{ route('logout') }}" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                 <i class="fa-solid fa-right-from-bracket"></i>
                                     Logout
                                 </a>
@@ -89,11 +81,10 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">         
-                    <!-- Page Heading -->
+                <div class="container-fluid">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary"><a href="{{ route('tambahwarga') }}" class="btn" style="background: #37306B; font-weight: bold; color:white; border-radius: 18px;"><i class="fa-solid fa-plus"></i> Tambah Data Warga</a></h6>
+                        <h6 class="m-0 font-weight-bold text-primary"><a href="{{ route('vaksin.create') }}" class="btn" style="background: #37306B; font-weight: bold; color:white; border-radius: 18px;"><i class="fa-solid fa-plus"></i> Tambah Data Vaksin</a></h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -101,18 +92,16 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th style="width: 100px;">Foto</th>
                                             <th>Nama</th>
-                                            <th>Status nikah</th>
-                                            <th>Jenis Kelamin</th>
-                                            <th>Tanggal Lahir</th>
+                                            <th>NIK</th>
+                                            <th>Vaksin</th>
                                             <th colspan="2"><center>Aksi</center></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <script>
                                             function cnfrm(id) {
-                                                console.log(`/hapuswarga/id/${id.toString()}`);
+                                                
                                                 Swal.fire({
                                                 title: 'Are you sure?',
                                                 text: "You won't be able to revert this!",
@@ -123,36 +112,44 @@
                                                 confirmButtonText: 'Yes, delete it!'
                                                 }).then((result) => {
                                                 if (result.isConfirmed) {
-                                                    window.location = `/hapuswarga/id/${id.toString()}`
+                                                    window.location = `/vaksin/${id.toString()}`
                                                     console.log("oke");
                                                 }
                                                 
                                                 })
                                             }
                                         </script>
-                                      @php
+                                    @php
                                         $i = 1;
-                                      @endphp
-                                      @foreach ($wargas as $warga)
-                                      <tr>
-                                        <td>{{ $i++ }}</td>
-                                        <td><img src="/img/{{ $warga->foto }}" alt="" srcset="" width="80" height="80"></td>
-                                        <td>{{ $warga->nama }}</td>
-                                        <td>{{ ($warga->nikah == 'Y') ? "Sudah menikah" : "Belum menikah" }}</td>
-                                        <td>{{ ($warga->jenis_kelamin == 'L') ? "Laki-Laki" : "Perempuan" }}</td>
-                                        <td>{{ $warga->tanggal_lahir }}</td>
-                                        <th><a href="/editwarga/{{ $warga->id }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i> Edit</a></th>
-                                        <th><button class="btn btn-danger" onclick="cnfrm({{ $warga->id }})"><i class="fa-solid fa-trash"></i> Hapus</button></th>
-                                      </tr>
-                                      @endforeach
+                                    @endphp
+                                    @foreach ($vaksins as $vaksin)
+                                        <tr>
+                                            <td>{{ $i++ }}</td>
+                                            <td>{{ $vaksin->warga->nama }}</td>
+                                            <td>{{ $vaksin->nik }}</td>
+                                            <td>{{ ($vaksin->vaksin == "Y") ? "Sudah vaksin" : "Belum vaksin" }}</td>                                      
+                                            <th><a href="{{ route('vaksin.edit', ['id' => $vaksin->id]) }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i> Edit</a></th>
+                                            <th><button onclick="cnfrm({{ $vaksin->id }})" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Hapus</button></th>
+                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
+
+                    
+
                 </div>
+                <!-- /.container-fluid -->
+
             </div>
+            <!-- End of Main Content -->
+
+
         </div>
+        <!-- End of Content Wrapper -->
+
     </div>
     <!-- End of Page Wrapper -->
 
@@ -175,7 +172,7 @@
                 <div class="modal-body">Yakin mau logout?</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{ route('logout') }}" style="color: black;"><b>Logout</b></a>
+                    <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
                 </div>
             </div>
         </div>

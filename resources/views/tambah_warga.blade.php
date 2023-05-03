@@ -7,16 +7,23 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
+    @if ($errors->any())
+      @foreach ($errors->all() as $error)
+          <div class="alert alert-warning" role="alert">
+              {{ $error }}
+          </div>
+      @endforeach
+    @endif
     <div class="container">
-    <h3>Tambah data</h3><hr><form action="" method="post" enctype="multipart/form-data">
+    <h3>Tambah data</h3><hr><form action="{{ route('actiontambahwarga') }}" method="post" enctype="multipart/form-data">
       @csrf
     <div class="mb-3">
       <label for="nama" class="form-label">Nama lengkap</label>
-      <input type="text" name="nama" placeholder="Nama" class="form-control" required id="nama">
+      <input type="text" name="nama" placeholder="Nama" class="form-control" id="nama">
     </div>
     <div class="mb-3">
       <label for="foto" class="form-label">Foto</label>
-      <input type="file" name="foto" id="foto" class="form-control" required>
+      <input type="file" name="foto" id="foto" class="form-control">
     </div>
     <hr>
     <div class="form-check">
@@ -43,7 +50,7 @@
     <hr>
     <div class="mb-3">
       <label for="tanggal" class="form-label">Tanggal lahir</label>
-      <input type="date" name="tanggal_lahir" class="form-control" required id="tanggal" data-date-format="DD MMMM YYYY">
+      <input type="date" name="tanggal_lahir" class="form-control" id="tanggal" data-date-format="DD MMMM YYYY">
     </div>
     <div class="mb-3">
       <button type="submit" name="submit" class="btn" style="background: #37306B; font-weight: bold; color:white; border-radius: 18px;"><i class="fa-solid fa-plus"></i> Tambah</button>

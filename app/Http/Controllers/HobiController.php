@@ -31,18 +31,19 @@ class HobiController extends Controller
         $hobi = HobiWarga::find($id);
         return view('hobi.edit', compact('hobi', 'wargas'));
     }
-    function update(Request $request, $id) {
+    function update(Request $request, HobiWarga $id) {
         // dd($request->all());
         $data = $request->validate([
             'warga_id' => 'required',
             'usia' => 'required',
             'hobi' => 'required'
         ]);
-        HobiWarga::find($id)->update($data);
+        $id->update($data);
         return redirect()->route('hobi.index');
     }
-    function delete($id) {
-        HobiWarga::find($id)->delete();
+    function delete(HobiWarga $id) {
+        
+        $id->delete();
         return redirect()->route('hobi.index')->with('msg', 'Berhasil hapus data');
     }
 }

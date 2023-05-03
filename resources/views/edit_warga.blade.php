@@ -9,13 +9,20 @@
     <link rel="icon" type="image/x-icon" href="img/logo.ico">
   </head>
   <body>
+    @if ($errors->any())
+      @foreach ($errors->all() as $error)
+          <div class="alert alert-warning" role="alert">
+              {{ $error }}
+          </div>
+      @endforeach
+    @endif
     <div class="container">
     <h3>Edit data</h3><hr>
     <form action="{{ route('editwarga') }}" method="post" enctype="multipart/form-data">
       @csrf
         <div class="mb-3">
           <label for="nama" class="form-label">Nama lengkap</label>
-          <input type="text" name="nama" placeholder="Nama" class="form-control" value="{{ $warga->nama }}" required id="nama">
+          <input type="text" name="nama" placeholder="Nama" class="form-control" value="{{ $warga->nama }}" id="nama">
         </div>
         <div class="mb-3">
           <img src="/img/{{ $warga->foto }}" alt="" width="100" height="100">
@@ -43,7 +50,7 @@
         <hr>
         <div class="mb-3">
           <label for="tgl" class="form-label">Tanggal lahir</label>
-          <input type="date" name="tanggal_lahir" id="tgl" placeholder="Tanggal lahir" class="form-control" value="{{ date('Y-m-d', strtotime($warga->tanggal_lahir)) }}" required>
+          <input type="date" name="tanggal_lahir" id="tgl" placeholder="Tanggal lahir" class="form-control" value="{{ date('Y-m-d', strtotime($warga->tanggal_lahir)) }}">
         </div>
         <div class="mb-3">
           <button type="submit" name="submit" class="btn" style="background: #37306B; font-weight: bold; color:white; border-radius: 18px;"><i class="fa-solid fa-floppy-disk"></i>  Simpan</button>

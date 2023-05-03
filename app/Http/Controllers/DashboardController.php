@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AgamaWarga;
+use App\Models\HobiWarga;
 use App\Models\PekerjaanWarga;
+use App\Models\VaksinWarga;
 use App\Models\Warga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +30,7 @@ class DashboardController extends Controller
         // dd($request->all());
         $data = $request->validate([
             'nama' => 'required',
-            'foto' => 'required',
+            'foto' => 'required|mimes:jpg,jpeg,png',
             'nikah' => 'required',
             'jenis_kelamin' => 'required',
             'tanggal_lahir' => 'required'
@@ -40,9 +43,9 @@ class DashboardController extends Controller
         Warga::create($data);
         return redirect()->route('dashboard');
     }
-    public function editwarga($id)
+    public function editwarga(Warga $id)
     {
-        $warga = Warga::find($id);
+        $warga = $id;
         return view('edit_warga', compact('warga'));
     }
     public function actioneditwarga(Request $re)
@@ -52,11 +55,11 @@ class DashboardController extends Controller
         if ($re->has('foto')) {
             
             $data = $re->validate([
-                'nama' => 'max:255',
-                'foto' => 'mimes:jpeg,png,jpg',
-                'nikah' => 'max:255',
-                'jenis_kelamin' => 'max:255',
-                'tanggal_lahir' => 'max:255'
+                'nama' => 'required|max:255',
+                'foto' => 'required|mimes:jpeg,png,jpg',
+                'nikah' => 'required|max:255',
+                'jenis_kelamin' => 'required|max:255',
+                'tanggal_lahir' => 'required|max:255'
             ]);
             $a = Warga::find($re->id);
             if (File::exists(public_path('img/' . $a->foto))) {
@@ -70,10 +73,10 @@ class DashboardController extends Controller
         else {
             
             $data = $re->validate([
-                'nama' => 'max:255',
-                'nikah' => 'max:255',
-                'jenis_kelamin' => 'max:255',
-                'tanggal_lahir' => 'max:255'
+                'nama' => 'required|max:255',
+                'nikah' => 'required|max:255',
+                'jenis_kelamin' => 'required|max:255',
+                'tanggal_lahir' => 'required|max:255'
             ]);
             
         }
@@ -93,6 +96,12 @@ class DashboardController extends Controller
             }
             $pekerjaan = PekerjaanWarga::where('warga_id', $data->id);
             $pekerjaan->delete();
+            $hobi = HobiWarga::where('warga_id', $data->id);
+            $hobi->delete();
+            $vaksin = VaksinWarga::where('warga_id', $data->id);
+            $vaksin->delete();
+            $agama = AgamaWarga::where('warga_id', $data->id);
+            $agama->delete();
             $data->delete();
             return redirect()->route('dashboard');
         }

@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('agama_warga', function (Blueprint $table) {
+        Schema::create('vaksin_warga', function (Blueprint $table) {
             $table->id();
             $table->foreignId('warga_id')->constrained('warga', 'id');
-            $table->string('agama_sekarang');
-            $table->string('agama_sebelumnya');
+            $table->string('nik')->unique();
+            $table->enum('vaksin', ['Y', 'N']);
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('agama_wargas');
+        Schema::dropIfExists('vaksin_wargas');
     }
 };
