@@ -21,7 +21,7 @@ class DashboardController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('login')->with('l', 'Berhasil logout');
     }
     public function tambahwarga() {
         return view('tambah_warga');
@@ -41,7 +41,7 @@ class DashboardController extends Controller
         $file->move(public_path('img'), $name);
         $data['tanggal_lahir'] = date('d-m-Y', strtotime($request->input('tanggal_lahir')));
         Warga::create($data);
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->with('tambah', 'tambah');
     }
     public function editwarga(Warga $id)
     {
@@ -85,7 +85,7 @@ class DashboardController extends Controller
         $data['tanggal_lahir'] = date('d-m-Y', strtotime($re->input('tanggal_lahir')));
         $warga = Warga::find($re->id);
         $warga->update($data);
-        return redirect('/dashboard')->with('msg', 'Berhasil update');
+        return redirect('/dashboard')->with('update', 'Berhasil update');
     }
     public function hapuswarga($id)
     {

@@ -24,7 +24,7 @@ class HobiController extends Controller
             'hobi' => 'required'
         ]);
         HobiWarga::create($data);
-        return redirect()->route('hobi.index');
+        return redirect()->route('hobi.index')->with('tambah', 'tambah');
     }
     function edit($id) {
         $wargas = Warga::all();
@@ -39,7 +39,7 @@ class HobiController extends Controller
             'hobi' => 'required'
         ]);
         $id->update($data);
-        return redirect()->route('hobi.index');
+        return redirect()->route('hobi.index')->with('update', 'data berhail di perbarui');
     }
     function delete(HobiWarga $id) {
         

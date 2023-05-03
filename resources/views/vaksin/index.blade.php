@@ -1,5 +1,15 @@
 @extends('layout.halaman')
 @section('body')
+@if (Session::get('tambah'))
+    <script>
+        Swal.fire('Berhasil menambah data')
+    </script>
+@endif
+@if (Session::get('update'))
+    <script>
+        Swal.fire('Berhasil mengubah data')
+    </script>
+@endif
     <div id="wrapper">
 
         <!-- Sidebar -->

@@ -20,6 +20,6 @@ class LoginController extends Controller
         if (Auth::attempt($data)) {
             return redirect()->route('dashboard');
         }
-        return back()->with('msg', "Username / password salah");
+        return back()->with('e', "Username / password salah");
     }
 }

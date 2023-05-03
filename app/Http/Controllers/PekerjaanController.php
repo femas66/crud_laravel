@@ -28,7 +28,7 @@ class PekerjaanController extends Controller
             'gaji' => 'required'
         ]);
         PekerjaanWarga::create($data);
-        return redirect()->route('pekerjaan.index');
+        return redirect()->route('pekerjaan.index')->with('tambah', 'tambah');
     }
     public function edit($id)
     {
@@ -45,7 +45,7 @@ class PekerjaanController extends Controller
             'gaji' => 'required'
         ]);
         PekerjaanWarga::find($id)->update($data);
-        return redirect()->route('pekerjaan.index');
+        return redirect()->route('pekerjaan.index')->with('update', 'update');
     }
     public function delete(Request $request, $id)
     {

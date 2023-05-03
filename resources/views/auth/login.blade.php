@@ -1,5 +1,6 @@
 @extends('layout.master')
 @section('content')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
       *{
@@ -123,6 +124,24 @@
       }
 
     </style>
+    @if (Session::get('e'))
+      <script>
+      Swal.fire(
+        "username / password salah"
+      )</script>
+    @endif
+    @if (Session::get('l'))
+      <script>
+      Swal.fire(
+        "berhasil logout"
+      )</script>
+    @endif
+    @if (Session::get('r'))
+      <script>
+      Swal.fire(
+        "berhasil register"
+      )</script>
+    @endif
     <div class="center">
       <h1>Login</h1>
       <form method="post" action="{{ route('login.store') }}">
@@ -137,7 +156,7 @@
           <span></span>
           <label><i class="fa-solid fa-lock"></i> Password</label>
         </div>
-        <div class="pass"><a href='password-reset.php'>Forgot Password?</a></div>
+        <div class="pass"><a href='{{ route('forgot-password.index') }}'>Forgot Password?</a></div>
         <button type="submit" name="submit">Login</button>
         <div class="signup_link">
           Tidak punya akun? <a href="{{ route('register') }}">Daftar</a>

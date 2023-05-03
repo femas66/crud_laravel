@@ -24,7 +24,7 @@ class AgamaController extends Controller
             'agama_sekarang' => 'required'
         ]);
         AgamaWarga::create($data);
-        return redirect()->route('agama.index');
+        return redirect()->route('agama.index')->with('tambah', 'tambah');
     }
     function edit($id) {
         $wargas = Warga::all();
@@ -39,7 +39,7 @@ class AgamaController extends Controller
             'agama_sekarang' => 'required'
         ]);
         AgamaWarga::find($id)->update($data);
-        return redirect()->route('agama.index');
+        return redirect()->route('agama.index')->with('update', 'update');
     }
     function delete($id) {
         AgamaWarga::find($id)->delete();

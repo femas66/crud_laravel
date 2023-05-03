@@ -25,7 +25,7 @@ class VaksinController extends Controller
         ]);
         
         VaksinWarga::create($data);
-        return redirect()->route('vaksin.index');
+        return redirect()->route('vaksin.index')->with('tambah', 'tambah');
     }
     function edit($id) {
         $wargas = Warga::all();
@@ -36,11 +36,11 @@ class VaksinController extends Controller
         // dd($request->all());
         $data = $request->validate([
             'warga_id' => 'required',
-            'nik' => 'required|unique:vaksin_warga',
+            'nik' => 'required|unique:vaksin_warga,nik,' . $id,
             'vaksin' => 'required'
         ]);
         VaksinWarga::find($id)->update($data);
-        return redirect()->route('vaksin.index');
+        return redirect()->route('vaksin.index')->with('update', 'update');
     }
     function delete($id) {
         VaksinWarga::find($id)->delete();
