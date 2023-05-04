@@ -91,7 +91,7 @@ return [
         'array' => 'The :attribute field must not have more than :max items.',
         'file' => 'The :attribute field must not be greater than :max kilobytes.',
         'numeric' => 'The :attribute field must not be greater than :max.',
-        'string' => 'The :attribute field must not be greater than :max characters.',
+        'string' => ':attribute tidak boleh lebih dari :max karakter.',
     ],
     'max_digits' => 'The :attribute field must not have more than :max digits.',
     'mimes' => 'Ekstensi :attribute hanya boleh: :values.',

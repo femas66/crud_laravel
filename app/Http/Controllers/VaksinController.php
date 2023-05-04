@@ -20,8 +20,8 @@ class VaksinController extends Controller
         // dd($request->all());
         $data = $request->validate([
             'warga_id' => 'required|unique:vaksin_warga,warga_id',
-            'usia' => 'required',
-            'nik' => 'required|unique:vaksin_warga',
+            'usia' => 'required|min:1',
+            'nik' => 'required|max:16|unique:vaksin_warga',
             'vaksin' => 'required'
         ], [
             'warga_id.unique' => 'Nama warga sudah digunakan'
@@ -39,8 +39,8 @@ class VaksinController extends Controller
         // dd($request->all());
         $data = $request->validate([
             'warga_id' => 'required|unique:vaksin_warga,warga_id,' . $id,
-            'usia' => 'required',
-            'nik' => 'required|unique:vaksin_warga,nik,' . $id,
+            'usia' => 'required|min:1',
+            'nik' => 'required|max:16|unique:vaksin_warga,nik,' . $id,
             'vaksin' => 'required'
         ], [
             'warga_id.unique' => 'Nama warga sudah digunakan'

@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\AgamaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgotpasswordController;
@@ -10,12 +11,12 @@ use App\Http\Controllers\VaksinController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/dashboard');
-Route::get('/login', [LoginController::class, 'login'])->name('login');
-Route::post('/login', [LoginController::class, 'store'])->name('login.store');
-Route::get('/register', [RegisterController::class, 'register'])->name('register');
-Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
-Route::get('/forgot-password', [ForgotpasswordController::class, 'index'])->name('forgot-password.index');
-Route::post('/forgot-password', [ForgotpasswordController::class, 'store'])->name('forgot-password.store');
+Route::get('/login', [LoginController::class, 'login'])->middleware('guest')->name('login');
+Route::post('/login', [LoginController::class, 'store'])->middleware('guest')->name('login.store');
+Route::get('/register', [RegisterController::class, 'register'])->middleware('guest')->name('register');
+Route::post('/register', [RegisterController::class, 'store'])->middleware('guest')->name('register.store');
+Route::get('/forgot-password', [ForgotpasswordController::class, 'index'])->middleware('guest')->name('forgot-password.index');
+Route::post('/forgot-password', [ForgotpasswordController::class, 'store'])->middleware('guest')->name('forgot-password.store');
 Route::group(['middleware' => 'cekLogin'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/logout', [DashboardController::class, 'logout'])->name('logout');

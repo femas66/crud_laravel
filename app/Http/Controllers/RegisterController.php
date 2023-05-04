@@ -17,7 +17,7 @@ class RegisterController extends Controller
         // dd($request->all());
         $request->validate([
             'name' => ['required', 'max:50'],
-            'email' => ['required'],
+            'email' => ['required', 'unique:users,email'],
             'password' => ['required']
         ]);
 

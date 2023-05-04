@@ -11,17 +11,20 @@ class Warga extends Model
     protected $table = 'warga';
     protected $guarded = ['id'];
 
-    function pekerjaan() {
+    function pekerjaan()
+    {
         return $this->hasMany(PekerjaanWarga::class);
     }
-    function hobi() {
+    function hobi()
+    {
         return $this->hasMany(HobiWarga::class);
     }
     public function vaksin()
     {
         return $this->hasOne(VaksinWarga::class);
     }
-    function agama() {
+    function agama()
+    {
         return $this->hasOne(AgamaWarga::class);
     }
 }
