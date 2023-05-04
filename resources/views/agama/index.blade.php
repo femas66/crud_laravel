@@ -76,6 +76,7 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>Foto</th>
                                             <th>Nama</th>
                                             <th>Agama sebelumnya</th>
                                             <th>Agama sekarang</th>
@@ -109,6 +110,7 @@
                                         @foreach ($agamas as $agama)
                                             <tr>
                                                 <td>{{ $i++ }}</td>
+                                                <td><img src="/img/{{ $agama->warga->foto }}" alt="" srcset="" width="80" height="80"></td>
                                                 <td>{{ $agama->warga->nama }}</td>
                                                 <td>{{ $agama->agama_sebelumnya }}</td>
                                                 <td>{{ $agama->agama_sekarang }}</td>

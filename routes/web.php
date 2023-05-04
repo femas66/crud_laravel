@@ -23,7 +23,8 @@ Route::group(['middleware' => 'cekLogin'], function () {
     Route::post('/tambahwarga', [DashboardController::class, 'actiontambahwarga'])->name('actiontambahwarga');
     Route::get('/editwarga/{id}', [DashboardController::class, 'editwarga']);
     Route::post('/editwarga/store', [DashboardController::class, 'actioneditwarga'])->name('editwarga');
-    Route::get('/hapuswarga/id/{id}', [DashboardController::class, 'hapuswarga']);
+    Route::get('/hapuswarga/id/{id}', [DashboardController::class, 'hapuswarga'])->name('warga.delete');
+    Route::get('/detail/{id}', [DashboardController::class, 'detail'])->name('warga.detail');
     // Halaman pekerjaan
     Route::prefix('pekerjaan')->group(function () {
         Route::get('/', [PekerjaanController::class, 'index'])->name('pekerjaan.index');

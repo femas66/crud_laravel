@@ -116,7 +116,7 @@
                                             <th>Status nikah</th>
                                             <th>Jenis Kelamin</th>
                                             <th>Tanggal Lahir</th>
-                                            <th colspan="2"><center>Aksi</center></th>
+                                            <th colspan="3"><center>Aksi</center></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -153,6 +153,7 @@
                                         <td>{{ $warga->tanggal_lahir }}</td>
                                         <th><a href="/editwarga/{{ $warga->id }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i> Edit</a></th>
                                         <th><button class="btn btn-danger" onclick="cnfrm({{ $warga->id }})"><i class="fa-solid fa-trash"></i> Hapus</button></th>
+                                        <th><a class="btn btn-primary" href="{{ route('warga.detail', ['id' => $warga->id]) }}"><i class="fa-solid fa-circle-info"></i> Detail</a></th>
                                       </tr>
                                       @endforeach
                                     </tbody>

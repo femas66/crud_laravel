@@ -100,8 +100,8 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>Foto</th>
                                             <th>Nama</th>
-                                            <th>Usia</th>
                                             <th>Hobi</th>
                                             <th colspan="2"><center>Aksi</center></th>
                                         </tr>
@@ -133,8 +133,8 @@
                                         @foreach ($hobis as $hobi)
                                             <tr>
                                                 <td>{{ $i++ }}</td>
+                                                <td><img src="/img/{{ $hobi->warga->foto }}" alt="" srcset="" width="80" height="80"></td>
                                                 <td>{{ $hobi->warga->nama }}</td>
-                                                <td>{{ $hobi->usia }}</td>
                                                 <td>{{ $hobi->hobi }}</td>
                                                 <th><a href="{{ route('hobi.edit', ['id' => $hobi->id]) }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i> Edit</a></th>
                                                 <th><button onclick="cnfrm({{ $hobi->id }})" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Hapus</button></th>

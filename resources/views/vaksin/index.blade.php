@@ -102,7 +102,9 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>Foto</th>
                                             <th>Nama</th>
+                                            <th>Usia</th>
                                             <th>NIK</th>
                                             <th>Vaksin</th>
                                             <th colspan="2"><center>Aksi</center></th>
@@ -135,8 +137,11 @@
                                     @foreach ($vaksins as $vaksin)
                                         <tr>
                                             <td>{{ $i++ }}</td>
+                                            <td><img src="/img/{{ $vaksin->warga->foto }}" alt="" srcset="" width="80" height="80"></td>
                                             <td>{{ $vaksin->warga->nama }}</td>
+                                            <td>{{ $vaksin->usia }}</td>
                                             <td>{{ $vaksin->nik }}</td>
+                                            
                                             <td>{{ ($vaksin->vaksin == "Y") ? "Sudah vaksin" : "Belum vaksin" }}</td>                                      
                                             <th><a href="{{ route('vaksin.edit', ['id' => $vaksin->id]) }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i> Edit</a></th>
                                             <th><button onclick="cnfrm({{ $vaksin->id }})" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Hapus</button></th>

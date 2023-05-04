@@ -19,9 +19,11 @@ class AgamaController extends Controller
     function store(Request $request) {
         // dd($request->all());
         $data = $request->validate([
-            'warga_id' => 'required',
+            'warga_id' => 'required|unique:agama_warga,warga_id',
             'agama_sebelumnya' => 'required',
             'agama_sekarang' => 'required'
+        ], [
+            'warga_id.unique' => 'Nama sudah digunakan'
         ]);
         AgamaWarga::create($data);
         return redirect()->route('agama.index')->with('tambah', 'tambah');
@@ -34,9 +36,11 @@ class AgamaController extends Controller
     function update(Request $request, $id) {
         // dd($request->all());
         $data = $request->validate([
-            'warga_id' => 'required',
+            'warga_id' => 'required|unique:agama_warga,warga_id,' . $id,
             'agama_sebelumnya' => 'required',
             'agama_sekarang' => 'required'
+        ], [
+            'warga_id.unique' => 'Nama sudah digunakan'
         ]);
         AgamaWarga::find($id)->update($data);
         return redirect()->route('agama.index')->with('update', 'update');

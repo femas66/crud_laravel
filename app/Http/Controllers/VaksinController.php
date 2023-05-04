@@ -19,9 +19,12 @@ class VaksinController extends Controller
     function store(Request $request) {
         // dd($request->all());
         $data = $request->validate([
-            'warga_id' => 'required',
+            'warga_id' => 'required|unique:vaksin_warga,warga_id',
+            'usia' => 'required',
             'nik' => 'required|unique:vaksin_warga',
             'vaksin' => 'required'
+        ], [
+            'warga_id.unique' => 'Nama warga sudah digunakan'
         ]);
         
         VaksinWarga::create($data);
@@ -35,9 +38,12 @@ class VaksinController extends Controller
     function update(Request $request, $id) {
         // dd($request->all());
         $data = $request->validate([
-            'warga_id' => 'required',
+            'warga_id' => 'required|unique:vaksin_warga,warga_id,' . $id,
+            'usia' => 'required',
             'nik' => 'required|unique:vaksin_warga,nik,' . $id,
             'vaksin' => 'required'
+        ], [
+            'warga_id.unique' => 'Nama warga sudah digunakan'
         ]);
         VaksinWarga::find($id)->update($data);
         return redirect()->route('vaksin.index')->with('update', 'update');

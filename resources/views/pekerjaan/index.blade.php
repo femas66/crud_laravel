@@ -79,6 +79,7 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>Foto</th>
                                             <th>Nama Warga</th>
                                             <th>Pekerjaan</th>
                                             <th>Alamat</th>
@@ -113,6 +114,7 @@
                                       @foreach ($pekerjaans as $pekerjaan)
                                       <tr>
                                         <td>{{ $i++ }}</td>
+                                        <td><img src="/img/{{ $pekerjaan->warga->foto }}" alt="" srcset="" width="80" height="80"></td>
                                         <td>{{ $pekerjaan->warga->nama }}</td>
                                         <td>{{ $pekerjaan->pekerjaan }}</td>
                                         <td>{{ $pekerjaan->alamat }}</td>

@@ -20,10 +20,6 @@
         @endforeach
       </select>
     </div>
-    <div class="mb-3">
-      <label for="jb" class="form-label">Usia</label>
-      <input type="number" name="usia" placeholder="Usia" class="form-control" id="jb" value="{{ $hobi->usia }}">
-    </div>
     <div class="form-floating mb-3">
       <input type="text" class="form-control" id="floatingInput" placeholder="Hobi" name="hobi" value="{{ $hobi->hobi }}">
       <label for="floatingInput">Hobi</label>

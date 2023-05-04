@@ -22,6 +22,10 @@
       </select>
     </div>
     <div class="mb-3">
+      <label for="jb" class="form-label">Usia</label>
+      <input type="number" name="usia" placeholder="Usia" class="form-control" id="jb" value="{{ $vaksin->usia }}">
+    </div>
+    <div class="mb-3">
       <label for="jb" class="form-label">NIK</label>
       <input type="number" name="nik" placeholder="Nik" class="form-control" id="jb" value="{{ $vaksin->nik }}">
     </div>

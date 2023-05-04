@@ -20,7 +20,6 @@ class HobiController extends Controller
         // dd($request->all());
         $data = $request->validate([
             'warga_id' => 'required',
-            'usia' => 'required',
             'hobi' => 'required'
         ]);
         HobiWarga::create($data);
@@ -35,7 +34,6 @@ class HobiController extends Controller
         // dd($request->all());
         $data = $request->validate([
             'warga_id' => 'required',
-            'usia' => 'required',
             'hobi' => 'required'
         ]);
         $id->update($data);

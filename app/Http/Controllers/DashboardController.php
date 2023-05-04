@@ -108,4 +108,9 @@ class DashboardController extends Controller
         return redirect()->route('dashboard');
         
     }
+    public function detail($id)
+    {
+        $warga = Warga::find($id);
+        return view('detail', compact('warga'));
+    }
 }
