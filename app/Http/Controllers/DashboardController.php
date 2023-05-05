@@ -26,7 +26,7 @@ class DashboardController extends Controller
     public function actiontambahwarga(Request $request)
     {
         $data = $request->validate([
-            'nama' => 'required',
+            'nama' => 'required|max:100|min:3',
             'foto' => 'required|mimes:jpg,jpeg,png',
             'nikah' => 'required',
             'jenis_kelamin' => 'required',
@@ -50,11 +50,11 @@ class DashboardController extends Controller
         $data = [];
         if ($re->has('foto')) {
             $data = $re->validate([
-                'nama' => 'required|max:255',
+                'nama' => 'required|max:100|min:3',
                 'foto' => 'required|mimes:jpeg,png,jpg',
-                'nikah' => 'required|max:255',
-                'jenis_kelamin' => 'required|max:255',
-                'tanggal_lahir' => 'required|max:255'
+                'nikah' => 'required',
+                'jenis_kelamin' => 'required',
+                'tanggal_lahir' => 'required'
             ]);
             $a = Warga::find($re->id);
             if (File::exists(public_path('img/' . $a->foto))) {
@@ -66,10 +66,10 @@ class DashboardController extends Controller
             $file->move(public_path('img'), $name);
         } else {
             $data = $re->validate([
-                'nama' => 'required|max:255',
-                'nikah' => 'required|max:255',
-                'jenis_kelamin' => 'required|max:255',
-                'tanggal_lahir' => 'required|max:255'
+                'nama' => 'required|max:255|min:3',
+                'nikah' => 'required',
+                'jenis_kelamin' => 'required',
+                'tanggal_lahir' => 'required'
             ]);
         }
         $data['tanggal_lahir'] = date('d-m-Y', strtotime($re->input('tanggal_lahir')));

@@ -141,7 +141,35 @@
     text-decoration: none;
     color: #666666;
   }
+  .alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+  }
+
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .closebtn:hover {
+    color: black;
+  }
 </style>
+@if ($errors->any())
+@foreach ($errors->all() as $error)
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  {{ $error }}
+</div>
+@endforeach
+@endif
 @if (Session::get('e'))
 <script>
   Swal.fire(

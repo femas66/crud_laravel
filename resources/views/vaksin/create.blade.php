@@ -17,7 +17,7 @@
       <label for="nama" class="form-label">Nama</label>
       <select class="form-select" aria-label="Default select example" name="warga_id">
         @foreach ($wargas as $warga)
-        <option value="{{ $warga->id }}">{{ $warga->nama }}</option>
+        <option title="{{ ($warga->jenis_kelamin == 'L') ? "Laki laki" : "Perempuan" }} | {{ $warga->tanggal_lahir }} | {{ ($warga->nikah == 'Y') ? "Sudah nikah" : "Belum nikah" }}" value="{{ $warga->id }}">{{ $warga->nama }}</option>
         @endforeach
       </select>
     </div>

@@ -15,7 +15,7 @@ class LoginController extends Controller
     {
         $data = $request->validate([
             'email' => ['required'],
-            'password' => ['required']
+            'password' => ['required', 'min:6']
         ]);
         if (Auth::attempt($data)) {
             return redirect()->route('dashboard');

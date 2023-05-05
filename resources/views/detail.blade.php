@@ -142,7 +142,7 @@
                       <th style="width: 100px;">Foto</th>
                       <th>Nama</th>
                       <th>Pekerjaan</th>
-                      <th>Alamat</th>
+                      <th>Alamat pekerjaan</th>
                       <th>Gaji</th>
                     </tr>
                   </thead>

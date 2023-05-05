@@ -26,6 +26,8 @@ class PekerjaanController extends Controller
             'pekerjaan' => 'required',
             'alamat' => 'required',
             'gaji' => 'required'
+        ], [
+            'warga_id.required' => 'Belum ada data warga'
         ]);
         PekerjaanWarga::create($data);
         return redirect()->route('pekerjaan.index')->with('tambah', 'tambah');
