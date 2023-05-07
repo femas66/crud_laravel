@@ -18,6 +18,7 @@ class LoginController extends Controller
             'password' => ['required', 'min:6']
         ]);
         if (Auth::attempt($data)) {
+            $request->session()->regenerate();
             return redirect()->route('dashboard');
         }
         return back()->with('e', "Username / password salah");

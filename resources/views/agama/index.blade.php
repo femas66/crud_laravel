@@ -158,7 +158,11 @@
             <div class="modal-body">Yakin mau logout?</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
+                {{-- <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a> --}}
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button class="btn btn-warning">Logout</button>
+                </form>
             </div>
         </div>
     </div>

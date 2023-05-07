@@ -14,9 +14,11 @@ class DashboardController extends Controller
         $wargas = Warga::all();
         return view('dashboard', compact('wargas'));
     }
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect()->route('login')->with('l', 'Berhasil logout');
     }
     public function tambahwarga()

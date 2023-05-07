@@ -19,7 +19,7 @@ Route::get('/forgot-password', [ForgotpasswordController::class, 'index'])->midd
 Route::post('/forgot-password', [ForgotpasswordController::class, 'store'])->middleware('guest')->name('forgot-password.store');
 Route::group(['middleware' => 'cekLogin'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/logout', [DashboardController::class, 'logout'])->name('logout');
+    Route::post('/logout', [DashboardController::class, 'logout'])->name('logout');
     Route::get('/tambahwarga', [DashboardController::class, 'tambahwarga'])->name('tambahwarga');
     Route::post('/tambahwarga', [DashboardController::class, 'actiontambahwarga'])->name('actiontambahwarga');
     Route::get('/editwarga/{id}', [DashboardController::class, 'editwarga']);
