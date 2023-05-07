@@ -81,11 +81,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                               
-                                <a class="dropdown-item" href="ganti-password.php">
-                                <i class="fa-solid fa-key"></i>
-                                    Ganti Password
-                                </a>
+      
                                 <a class="dropdown-item" href="{{ route('logout') }}" data-toggle="modal" data-target="#logoutModal">
                                 <i class="fa-solid fa-right-from-bracket"></i>
                                     Logout
@@ -140,22 +136,31 @@
                                                 })
                                             }
                                         </script>
-                                      @php
-                                        $i = 1;
-                                      @endphp
-                                      @foreach ($wargas as $warga)
-                                      <tr>
-                                        <td>{{ $i++ }}</td>
-                                        <td><img src="/img/{{ $warga->foto }}" alt="" srcset="" width="80" height="80"></td>
-                                        <td>{{ $warga->nama }}</td>
-                                        <td>{{ ($warga->nikah == 'Y') ? "Sudah menikah" : "Belum menikah" }}</td>
-                                        <td>{{ ($warga->jenis_kelamin == 'L') ? "Laki-Laki" : "Perempuan" }}</td>
-                                        <td>{{ $warga->tanggal_lahir }}</td>
-                                        <th><a href="/editwarga/{{ $warga->id }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i> Edit</a></th>
-                                        <th><button class="btn btn-danger" onclick="cnfrm({{ $warga->id }})"><i class="fa-solid fa-trash"></i> Hapus</button></th>
-                                        <th><a class="btn btn-primary" href="{{ route('warga.detail', ['id' => $warga->id]) }}"><i class="fa-solid fa-circle-info"></i> Detail</a></th>
-                                      </tr>
-                                      @endforeach
+                                        @if (count($wargas) > 0)
+                                        @php
+                                            $i = 1;
+                                        @endphp
+                                        @foreach ($wargas as $warga)
+                                        <tr>
+                                            <td>{{ $i++ }}</td>
+                                            <td><img src="/img/{{ $warga->foto }}" alt="" srcset="" width="80" height="80"></td>
+                                            <td>{{ $warga->nama }}</td>
+                                            <td>{{ ($warga->nikah == 'Y') ? "Sudah menikah" : "Belum menikah" }}</td>
+                                            <td>{{ ($warga->jenis_kelamin == 'L') ? "Laki-Laki" : "Perempuan" }}</td>
+                                            <td>{{ $warga->tanggal_lahir }}</td>
+                                            <th><a href="/editwarga/{{ $warga->id }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i> Edit</a></th>
+                                            <th><button class="btn btn-danger" onclick="cnfrm({{ $warga->id }})"><i class="fa-solid fa-trash"></i> Hapus</button></th>
+                                            <th><a class="btn btn-primary" href="{{ route('warga.detail', ['id' => $warga->id]) }}"><i class="fa-solid fa-circle-info"></i> Detail</a></th>
+                                        </tr>
+                                        @endforeach
+                                        @else
+                                        
+                                        
+                                        <tr>
+                                            <td colspan="7"><center>Tidak ada data</center></td>
+                                        </tr>
+                                    
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>

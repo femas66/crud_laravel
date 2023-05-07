@@ -72,11 +72,6 @@
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
-
-                            <a class="dropdown-item" href="ganti-password.php">
-                                <i class="fa-solid fa-key"></i>
-                                Ganti Password
-                            </a>
                             <a class="dropdown-item" href="{{ route('logout') }}" data-toggle="modal"
                                 data-target="#logoutModal">
                                 <i class="fa-solid fa-right-from-bracket"></i>
@@ -133,23 +128,30 @@
                                                 })
                                             }
                                     </script>
-                                    @php
-                                    $i = 1;
-                                    @endphp
-                                    @foreach ($hobis as $hobi)
-                                    <tr>
-                                        <td>{{ $i++ }}</td>
-                                        <td><img src="/img/{{ $hobi->warga->foto }}" alt="" srcset="" width="80"
-                                                height="80"></td>
-                                        <td>{{ $hobi->warga->nama }}</td>
-                                        <td>{{ $hobi->hobi }}</td>
-                                        <th><a href="{{ route('hobi.edit', ['id' => $hobi->id]) }}"
-                                                class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>
-                                                Edit</a></th>
-                                        <th><button onclick="cnfrm({{ $hobi->id }})" class="btn btn-danger"><i
-                                                    class="fa-solid fa-trash"></i> Hapus</button></th>
-                                    </tr>
-                                    @endforeach
+                                    @if (count($hobis) != 0)
+                                        @php
+                                        $i = 1;
+                                        @endphp
+                                        @foreach ($hobis as $hobi)
+                                        <tr>
+                                            <td>{{ $i++ }}</td>
+                                            <td><img src="/img/{{ $hobi->warga->foto }}" alt="" srcset="" width="80"
+                                                    height="80"></td>
+                                            <td>{{ $hobi->warga->nama }}</td>
+                                            <td>{{ $hobi->hobi }}</td>
+                                            <th><a href="{{ route('hobi.edit', ['id' => $hobi->id]) }}"
+                                                    class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>
+                                                    Edit</a></th>
+                                            <th><button onclick="cnfrm({{ $hobi->id }})" class="btn btn-danger"><i
+                                                        class="fa-solid fa-trash"></i> Hapus</button></th>
+                                        </tr>
+                                        @endforeach
+                                    @else
+                                        
+                                        <tr>
+                                            <td colspan="5"><center>Tidak ada data</center></td>
+                                        </tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

@@ -15,11 +15,17 @@
     @csrf
     <div class="mb-3">
       <label for="nama" class="form-label">Nama</label>
-      <select class="form-select" aria-label="Default select example" name="warga_id">
-        @foreach ($wargas as $warga)
-        <option title="{{ ($warga->jenis_kelamin == 'L') ? "Laki laki" : "Perempuan" }} | {{ $warga->tanggal_lahir }} | {{ ($warga->nikah == 'Y') ? "Sudah nikah" : "Belum nikah" }}" value="{{ $warga->id }}">{{ $warga->nama }}</option>
-        @endforeach
-      </select>
+      @if (count($wargas) == 0)
+        <select class="form-select" aria-label="Default select example">
+          <option>Tidak ada warga</option>
+        </select>
+      @else
+        <select class="form-select" aria-label="Default select example" name="warga_id">
+          @foreach ($wargas as $warga)
+          <option value="{{ $warga->id }}" title="{{ ($warga->jenis_kelamin == 'L') ? "Laki laki" : "Perempuan" }} | {{ $warga->tanggal_lahir }} | {{ ($warga->nikah == 'Y') ? "Sudah nikah" : "Belum nikah" }}">{{ $warga->nama }}</option>
+          @endforeach
+        </select>
+      @endif
     </div>
     <div class="mb-3">
       <label for="jb" class="form-label">Usia</label>

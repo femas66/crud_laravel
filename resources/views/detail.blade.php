@@ -88,10 +88,6 @@
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
 
-                <a class="dropdown-item" href="ganti-password.php">
-                  <i class="fa-solid fa-key"></i>
-                  Ganti Password
-                </a>
                 <a class="dropdown-item" href="{{ route('logout') }}" data-toggle="modal" data-target="#logoutModal">
                   <i class="fa-solid fa-right-from-bracket"></i>
                   Logout
@@ -149,7 +145,7 @@
                   <tbody>
                     @if (count($warga->pekerjaan) == 0)
                     <tr>
-                      <td colspan="5">Tidak ada data</td>
+                      <td colspan="5"><center>Tidak ada data</center></td>
                     </tr>
                     @else
                     <tr>
@@ -188,7 +184,7 @@
                   <tbody>
                     @if (count($warga->hobi) == 0)
                     <tr>
-                      <td colspan="3">Tidak ada data</td>
+                      <td colspan="3"><center>Tidak ada data</center></td>
                     </tr>
                     @else
                     <tr>
@@ -225,7 +221,7 @@
                   <tbody>
                     @if ($warga->vaksin == null)
                     <tr>
-                      <td colspan="4">Tidak ada data</td>
+                      <td colspan="4"><center>Tidak ada data</center></td>
                     </tr>
                     @else
                     <tr>
@@ -259,7 +255,7 @@
                   <tbody>
                     @if ($warga->agama == null)
                     <tr>
-                      <td colspan="4">Tidak ada data</td>
+                      <td colspan="4"><center>Tidak ada data</center></td>
                     </tr>
                     @else
                     <tr>

@@ -75,10 +75,7 @@
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
 
-                            <a class="dropdown-item" href="ganti-password.php">
-                                <i class="fa-solid fa-key"></i>
-                                Ganti Password
-                            </a>
+  
                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                 <i class="fa-solid fa-right-from-bracket"></i>
                                 Logout
@@ -136,26 +133,33 @@
                                                 })
                                             }
                                     </script>
-                                    @php
-                                    $i = 1;
-                                    @endphp
-                                    @foreach ($vaksins as $vaksin)
-                                    <tr>
-                                        <td>{{ $i++ }}</td>
-                                        <td><img src="/img/{{ $vaksin->warga->foto }}" alt="" srcset="" width="80"
-                                                height="80"></td>
-                                        <td>{{ $vaksin->warga->nama }}</td>
-                                        <td>{{ $vaksin->usia }}</td>
-                                        <td>{{ $vaksin->nik }}</td>
+                                    @if(count($vaksins) != 0)
+                                        @php
+                                        $i = 1;
+                                        @endphp
+                                        @foreach ($vaksins as $vaksin)
+                                        <tr>
+                                            <td>{{ $i++ }}</td>
+                                            <td><img src="/img/{{ $vaksin->warga->foto }}" alt="" srcset="" width="80"
+                                                    height="80"></td>
+                                            <td>{{ $vaksin->warga->nama }}</td>
+                                            <td>{{ $vaksin->usia }}</td>
+                                            <td>{{ $vaksin->nik }}</td>
 
-                                        <td>{{ ($vaksin->vaksin == "Y") ? "Sudah vaksin" : "Belum vaksin" }}</td>
-                                        <th><a href="{{ route('vaksin.edit', ['id' => $vaksin->id]) }}"
-                                                class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>
-                                                Edit</a></th>
-                                        <th><button onclick="cnfrm({{ $vaksin->id }})" class="btn btn-danger"><i
-                                                    class="fa-solid fa-trash"></i> Hapus</button></th>
-                                    </tr>
-                                    @endforeach
+                                            <td>{{ ($vaksin->vaksin == "Y") ? "Sudah vaksin" : "Belum vaksin" }}</td>
+                                            <th><a href="{{ route('vaksin.edit', ['id' => $vaksin->id]) }}"
+                                                    class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>
+                                                    Edit</a></th>
+                                            <th><button onclick="cnfrm({{ $vaksin->id }})" class="btn btn-danger"><i
+                                                        class="fa-solid fa-trash"></i> Hapus</button></th>
+                                        </tr>
+                                        @endforeach
+                                    @else
+                                        
+                                        <tr>
+                                            <td colspan="7"><center>Tidak ada data</center></td>
+                                        </tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
