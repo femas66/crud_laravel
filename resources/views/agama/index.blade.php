@@ -78,7 +78,6 @@
                                     <tr>
                                         <th>Foto</th>
                                         <th>Nama</th>
-                                        <th>Agama sebelumnya</th>
                                         <th>Agama sekarang</th>
                                         <th colspan="2">
                                             <center>Aksi</center>
@@ -112,7 +111,6 @@
                                             <td><img src="/img/{{ $agama->warga->foto }}" alt="" srcset="" width="80"
                                                     height="80"></td>
                                             <td>{{ $agama->warga->nama }}</td>
-                                            <td>{{ $agama->agama_sebelumnya }}</td>
                                             <td>{{ $agama->agama_sekarang }}</td>
                                             <th><a href="{{ route('agama.edit', ['id' => $agama->id]) }}"
                                                     class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>

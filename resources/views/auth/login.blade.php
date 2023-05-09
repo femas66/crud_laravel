@@ -203,7 +203,7 @@
   <form method="post" action="{{ route('login.store') }}">
     @csrf
     <div class="txt_field">
-      <input type="text" required name="email" autofocus value="{{ old('email') }}">
+      <input type="text" required name="email" value="{{ old('email') }}">
       <span></span>
       <label><i class="fa-solid fa-envelope"></i> Email</label>
     </div>

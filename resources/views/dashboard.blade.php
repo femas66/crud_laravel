@@ -109,8 +109,8 @@
                                             <th>#</th>
                                             <th style="width: 100px;">Foto</th>
                                             <th>Nama</th>
-                                            <th>Status nikah</th>
-                                            <th>Jenis Kelamin</th>
+                                            <th>NIK</th>
+                                            <th>Jenis kelamin</th>
                                             <th>Tanggal Lahir</th>
                                             <th colspan="3"><center>Aksi</center></th>
                                         </tr>
@@ -145,7 +145,7 @@
                                             <td>{{ $i++ }}</td>
                                             <td><img src="/img/{{ $warga->foto }}" alt="" srcset="" width="80" height="80"></td>
                                             <td>{{ $warga->nama }}</td>
-                                            <td>{{ ($warga->nikah == 'Y') ? "Sudah menikah" : "Belum menikah" }}</td>
+                                            <td>{{ $warga->nik }}</td>
                                             <td>{{ ($warga->jenis_kelamin == 'L') ? "Laki-Laki" : "Perempuan" }}</td>
                                             <td>{{ $warga->tanggal_lahir }}</td>
                                             <th><a href="/editwarga/{{ $warga->id }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i> Edit</a></th>

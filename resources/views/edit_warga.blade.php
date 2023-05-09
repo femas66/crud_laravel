@@ -1,12 +1,14 @@
 @extends('layout.form')
 @section('body')
 @if ($errors->any())
-@foreach ($errors->all() as $error)
 <div class="alert">
   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  {{ $error }}
+  <ul>
+  @foreach ($errors->all() as $error)
+    <li>{{ $error }}</li>
+  @endforeach
+  </ul>
 </div>
-@endforeach
 @endif
   <div class="container">
     <h3>Edit data</h3>
@@ -22,17 +24,11 @@
         <label for="foto" class="form-label">Foto</label>
         <input type="file" name="foto" id="foto" class="form-control">
       </div>
-      <hr><input type="hidden" name="id" value="{{ $warga->id }}">
-      <div class="form-check">
-        <label for="lbb">Sudah nikah</label>
-        <input type="radio" name="nikah" id="lbb" value="Y" class="form-check-input" {{ $warga->nikah == 'Y' ? "checked"
-        : "" }}>
-      </div>
-      <div class="form-check">
-        <label for="pbb">Belum nikah</label>
-        <input type="radio" name="nikah" id="pbb" value="N" class="form-check-input" {{ $warga->nikah == 'N' ? "checked"
-        : "" }}>
-      </div>
+      <input type="hidden" name="id" value="{{ $warga->id }}">
+      <div class="mb-3">
+        <label for="nik" class="form-label">NIK</label>
+        <input type="text" name="nik" placeholder="Nama" class="form-control" value="{{ $warga->nik }}" id="nik">
+      </div> 
       <hr>
       <div class="form-check">
         <label for="l">Laki laki</label>

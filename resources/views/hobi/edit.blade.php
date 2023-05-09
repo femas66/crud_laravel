@@ -1,12 +1,14 @@
 @extends('layout.form')
 @section('body')
 @if ($errors->any())
-@foreach ($errors->all() as $error)
 <div class="alert">
   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  {{ $error }}
+  <ul>
+  @foreach ($errors->all() as $error)
+    <li>{{ $error }}</li>
+  @endforeach
+  </ul>
 </div>
-@endforeach
 @endif
 <div class="container">
   <h3>Edit data</h3>

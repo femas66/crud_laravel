@@ -20,7 +20,6 @@ class AgamaController extends Controller
         // dd($request->all());
         $data = $request->validate([
             'warga_id' => 'required|unique:agama_warga,warga_id',
-            'agama_sebelumnya' => 'required',
             'agama_sekarang' => 'required'
         ], [
             'warga_id.unique' => 'Nama sudah digunakan'
@@ -37,7 +36,6 @@ class AgamaController extends Controller
         // dd($request->all());
         $data = $request->validate([
             'warga_id' => 'required|unique:agama_warga,warga_id,' . $id,
-            'agama_sebelumnya' => 'required',
             'agama_sekarang' => 'required'
         ], [
             'warga_id.unique' => 'Nama sudah digunakan'

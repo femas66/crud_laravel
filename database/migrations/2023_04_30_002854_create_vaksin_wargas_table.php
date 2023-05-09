@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unique('warga_id');
             $table->foreignId('warga_id')->constrained('warga', 'id')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('usia');
-            $table->string('nik')->unique();
             $table->enum('vaksin', ['Y', 'N']);
             $table->timestamps();
         });

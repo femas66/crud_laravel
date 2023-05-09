@@ -1,12 +1,14 @@
 @extends('layout.form')
 @section('body')
 @if ($errors->any())
-@foreach ($errors->all() as $error)
 <div class="alert">
   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  {{ $error }}
+  <ul>
+  @foreach ($errors->all() as $error)
+    <li>{{ $error }}</li>
+  @endforeach
+  </ul>
 </div>
-@endforeach
 @endif
 <div class="container">
   <h3>Tambah data</h3>
@@ -31,15 +33,15 @@
     </div>
     <div class="mb-3">
       <label for="tanggal" class="form-label">Pekerjaan Warga</label>
-      <input type="text" name="pekerjaan" class="form-control" id="tanggal" placeholder="Pekerjaan">
+      <input type="text" name="pekerjaan" class="form-control" id="tanggal" placeholder="Pekerjaan" value="{{ old('pekerjaan') }}">
     </div>
-    <div class="mb-3">
-      <label for="tanggal" class="form-label">Alamat</label>
-      <input type="text" name="alamat" class="form-control" id="tanggal" placeholder="Alamat">
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Alamat pekerjaan</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="alamat">{{ old('alamat') }}</textarea>
     </div>
     <div class="mb-3">
       <label for="tanggal" class="form-label">Gaji</label>
-      <input type="number" name="gaji" class="form-control" id="tanggal" placeholder="Gaji">
+      <input type="number" name="gaji" class="form-control" id="tanggal" placeholder="Gaji"  value="{{ old('gaji') }}">
     </div>
     <div class="mb-3">
       <button type="submit" name="submit" class="btn"

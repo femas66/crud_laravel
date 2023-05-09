@@ -30,7 +30,7 @@ class DashboardController extends Controller
         $data = $request->validate([
             'nama' => 'required|max:100|min:3',
             'foto' => 'required|file|mimes:jpg,jpeg,png',
-            'nikah' => 'required',
+            'nik' => 'required|unique:warga,nik',
             'jenis_kelamin' => 'required',
             'tanggal_lahir' => 'required'
         ]);
@@ -54,7 +54,7 @@ class DashboardController extends Controller
             $data = $re->validate([
                 'nama' => 'required|max:100|min:3',
                 'foto' => 'required|mimes:jpeg,png,jpg',
-                'nikah' => 'required',
+                'nik' => 'required|unique:warga,nik,' . $re->id,
                 'jenis_kelamin' => 'required',
                 'tanggal_lahir' => 'required'
             ]);
@@ -69,7 +69,7 @@ class DashboardController extends Controller
         } else {
             $data = $re->validate([
                 'nama' => 'required|max:255|min:3',
-                'nikah' => 'required',
+                'nik' => 'required|unique:warga,nik,' . $re->id,
                 'jenis_kelamin' => 'required',
                 'tanggal_lahir' => 'required'
             ]);

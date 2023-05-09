@@ -175,49 +175,32 @@
 @endforeach
 @endif
 <body>
-  <script>
-    function ceksama() {
-      let password = document.getElementById('password').value;
-      let confirmpassword = document.getElementById('confirmpassword').value;
-      if (password == confirmpassword) {
-        document.getElementById('error').style.visibility = 'hidden';
-        document.getElementById('btn').disabled = false;
-      } else {
-        document.getElementById('btn').disabled = true;
-        document.getElementById('error').style.visibility = 'visible';
-      }
-    }
-  </script>
   <div class="center">
     <h1>Daftar</h1>
     <form method="post" action="{{ route('register.store') }}">
       @csrf
       <div class="txt_field">
-        <input type="text" required name="name" autofocus>
+        <input type="text" name="name" value="{{ old('name') }}">
         <span></span>
         <label><i class="fa-solid fa-user"></i> Name</label>
       </div>
       <div class="txt_field">
-        <input type="text" required name="email">
+        <input type="text" name="email" value="{{ old('email') }}">
         <span></span>
         <label><i class="fa-solid fa-envelope"></i> Email</label>
       </div>
       <div class="txt_field">
-        <input type="password" required name="password" id="password" onkeyup="ceksama()">
+        <input type="password" name="password" id="password">
         <span></span>
         <label><i class="fa-solid fa-lock"></i> Password</label>
       </div>
       <div class="txt_field">
-        <input type="password" required id="confirmpassword" onkeyup="ceksama()">
+        <input type="password" name="confirm_password" id="confirmpassword">
         <span></span>
         <label><i class="fa-solid fa-lock"></i> Konfirmasi Password</label>
       </div>
-      <button type="submit" name="submit" id="btn" disabled>Daftar</button>
-      <div class="signup_link"
-        style="color:red; visibility: hidden; margin-top: -2px; padding-top: -10px; padding-bottom: -10px;" id="error">
-        Password tidak sama
-      </div>
-      <div class="signup_link" style="margin-top: -14px;">
+      <button type="submit" name="submit" id="btn">Daftar</button>
+      <div class="signup_link">
         Sudah punya akun? <a href="{{ route('login') }}">Login</a>
       </div>
     </form>

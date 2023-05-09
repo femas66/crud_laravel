@@ -1,12 +1,14 @@
 @extends('layout.form')
 @section('body')
 @if ($errors->any())
-@foreach ($errors->all() as $error)
 <div class="alert">
   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  {{ $error }}
+  <ul>
+  @foreach ($errors->all() as $error)
+    <li>{{ $error }}</li>
+  @endforeach
+  </ul>
 </div>
-@endforeach
 @endif
 <div class="container">
   <h3>Tambah data</h3>
@@ -28,22 +30,13 @@
         </select>
       @endif
     </div>
-    <div class="mb-3">
-      <label for="jb" class="form-label">Usia</label>
-      <input type="number" name="usia" placeholder="Usia" class="form-control" id="jb">
-    </div>
-    <div class="mb-3">
-      <label for="jb" class="form-label">NIK</label>
-      <input type="number" name="nik" placeholder="Nik" class="form-control" id="jb">
-    </div>
-    <hr>
     <div class="form-check">
       <label for="l">Sudah vaksin</label>
-      <input type="radio" name="vaksin" id="l" value="Y" class="form-check-input">
+      <input type="radio" name="vaksin" id="l" value="Y" class="form-check-input" {{ (old('vaksin') == 'Y') ? "checked" : "" }}>
     </div>
     <div class="form-check">
       <label for="p">Belum vaksin</label>
-      <input type="radio" name="vaksin" id="p" value="N" class="form-check-input">
+      <input type="radio" name="vaksin" id="p" value="N" class="form-check-input" {{ (old('vaksin') == 'N') ? "checked" : "" }}>
     </div>
     <hr>
     <div class="mb-3">

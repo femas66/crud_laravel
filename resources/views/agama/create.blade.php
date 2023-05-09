@@ -1,12 +1,14 @@
 @extends('layout.form')
 @section('body')
 @if ($errors->any())
-@foreach ($errors->all() as $error)
 <div class="alert">
   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  {{ $error }}
+  <ul>
+  @foreach ($errors->all() as $error)
+    <li>{{ $error }}</li>
+  @endforeach
+  </ul>
 </div>
-@endforeach
 @endif
 <div class="container">
   <h3>Tambah data</h3>
@@ -30,19 +32,11 @@
     </div>
     <label for="a" class="form-label">Agama sekarang</label>
     <select class="form-select" aria-label="Default select example" id="a" name="agama_sekarang">
-      <option selected value="islam">Islam</option>
-      <option value="kristen">Kristen</option>
-      <option value="hindu">Hindu</option>
-      <option value="budha">Budha</option>
-      <option value="konghucu">Konghucu</option>
-    </select>
-    <label for="a" class="form-label">Agama sebelumnya</label>
-    <select class="form-select" aria-label="Default select example" id="a" name="agama_sebelumnya">
-      <option selected value="islam">Islam</option>
-      <option value="kristen">Kristen</option>
-      <option value="hindu">Hindu</option>
-      <option value="budha">Budha</option>
-      <option value="konghucu">Konghucu</option>
+      <option {{ (old('agama_sekarang') == 'islam') ? "selected" : "" }} value="islam">Islam</option>
+      <option {{ (old('agama_sekarang') == 'kristen') ? "selected" : "" }} value="kristen">Kristen</option>
+      <option {{ (old('agama_sekarang') == 'hindu') ? "selected" : "" }} value="hindu">Hindu</option>
+      <option {{ (old('agama_sekarang') == 'budha') ? "selected" : "" }} value="budha">Budha</option>
+      <option {{ (old('agama_sekarang') == 'konghucu') ? "selected" : "" }} value="konghucu">Konghucu</option>
     </select>
 
     <hr>

@@ -108,7 +108,7 @@
                     <tr>
                       <th style="width: 100px;">Foto</th>
                       <th>Nama</th>
-                      <th>Status nikah</th>
+                      <th>NIK</th>
                       <th>Jenis Kelamin</th>
                       <th>Tanggal Lahir</th>
                     </tr>
@@ -117,7 +117,7 @@
                     <tr>
                       <td><img src="/img/{{ $warga->foto }}" alt="" srcset="" width="80" height="80"></td>
                       <td>{{ $warga->nama }}</td>
-                      <td>{{ ($warga->nikah == 'Y') ? "Sudah menikah" : "Belum menikah" }}</td>
+                      <td>{{ $warga->nik }}</td>
                       <td>{{ ($warga->jenis_kelamin == 'L') ? "Laki-Laki" : "Perempuan" }}</td>
                       <td>{{ $warga->tanggal_lahir }}</td>
                     </tr>
@@ -214,7 +214,6 @@
                     <tr>
                       <th style="width: 100px;">Foto</th>
                       <th>Nama</th>
-                      <th>Usia</th>
                       <th>Vaksin</th>
                     </tr>
                   </thead>
@@ -227,7 +226,6 @@
                     <tr>
                       <td><img src="/img/{{ $warga->foto }}" alt="" srcset="" width="80" height="80"></td>
                       <td>{{ $warga->nama }}</td>
-                      <td>{{ $warga->vaksin->usia }}</td>
                       <td>{{ ($warga->vaksin->vaksin == 'Y') ? "Sudah vaksin" : "Belum vaksin" }}</td>
                     </tr>
                     @endif
@@ -248,7 +246,6 @@
                     <tr>
                       <th style="width: 100px;">Foto</th>
                       <th>Nama</th>
-                      <th>Agama sebelumnya</th>
                       <th>Agama sekarang</th>
                     </tr>
                   </thead>
@@ -261,7 +258,6 @@
                     <tr>
                       <td><img src="/img/{{ $warga->foto }}" alt="" srcset="" width="80" height="80"></td>
                       <td>{{ $warga->nama }}</td>
-                      <td>{{ $warga->agama->agama_sebelumnya }}</td>
                       <td>{{ $warga->agama->agama_sekarang }}</td>
                     </tr>
                     @endif

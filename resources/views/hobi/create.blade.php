@@ -1,12 +1,14 @@
 @extends('layout.form')
 @section('body')
 @if ($errors->any())
-@foreach ($errors->all() as $error)
 <div class="alert">
   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  {{ $error }}
+  <ul>
+  @foreach ($errors->all() as $error)
+    <li>{{ $error }}</li>
+  @endforeach
+  </ul>
 </div>
-@endforeach
 @endif
 <div class="container">
   <h3>Tambah data</h3>
@@ -31,7 +33,7 @@
       @endif
     </div>
     <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="floatingInput" placeholder="Hobi" name="hobi">
+      <input type="text" class="form-control" id="floatingInput" placeholder="Hobi" name="hobi" value="{{ old('hobi') }}">
       <label for="floatingInput">Hobi</label>
     </div>
     <hr>

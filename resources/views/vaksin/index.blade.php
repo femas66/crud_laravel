@@ -103,8 +103,6 @@
                                     <tr>
                                         <th>Foto</th>
                                         <th>Nama</th>
-                                        <th>Usia</th>
-                                        <th>NIK</th>
                                         <th>Vaksin</th>
                                         <th colspan="2">
                                             <center>Aksi</center>
@@ -138,8 +136,6 @@
                                             <td><img src="/img/{{ $vaksin->warga->foto }}" alt="" srcset="" width="80"
                                                     height="80"></td>
                                             <td>{{ $vaksin->warga->nama }}</td>
-                                            <td>{{ $vaksin->usia }}</td>
-                                            <td>{{ $vaksin->nik }}</td>
 
                                             <td>{{ ($vaksin->vaksin == "Y") ? "Sudah vaksin" : "Belum vaksin" }}</td>
                                             <th><a href="{{ route('vaksin.edit', ['id' => $vaksin->id]) }}"
@@ -152,7 +148,7 @@
                                     @else
                                         
                                         <tr>
-                                            <td colspan="7"><center>Tidak ada data</center></td>
+                                            <td colspan="5"><center>Tidak ada data</center></td>
                                         </tr>
                                     @endif
                                 </tbody>
