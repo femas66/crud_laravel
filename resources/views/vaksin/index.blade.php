@@ -101,7 +101,6 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
                                         <th>Foto</th>
                                         <th>Nama</th>
                                         <th>Usia</th>
@@ -134,12 +133,8 @@
                                             }
                                     </script>
                                     @if(count($vaksins) != 0)
-                                        @php
-                                        $i = 1;
-                                        @endphp
                                         @foreach ($vaksins as $vaksin)
                                         <tr>
-                                            <td>{{ $i++ }}</td>
                                             <td><img src="/img/{{ $vaksin->warga->foto }}" alt="" srcset="" width="80"
                                                     height="80"></td>
                                             <td>{{ $vaksin->warga->nama }}</td>

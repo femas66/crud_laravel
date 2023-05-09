@@ -76,7 +76,6 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
                                         <th>Foto</th>
                                         <th>Nama</th>
                                         <th>Agama sebelumnya</th>
@@ -108,13 +107,8 @@
                                             }
                                     </script>
                                     @if (count($agamas) != 0)
-                                    
-                                        @php
-                                        $i = 1;
-                                        @endphp
                                         @foreach ($agamas as $agama)
                                         <tr>
-                                            <td>{{ $i++ }}</td>
                                             <td><img src="/img/{{ $agama->warga->foto }}" alt="" srcset="" width="80"
                                                     height="80"></td>
                                             <td>{{ $agama->warga->nama }}</td>

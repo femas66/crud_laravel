@@ -19,6 +19,9 @@
         <select class="form-select" aria-label="Default select example">
           <option>Tidak ada warga</option>
         </select>
+        <small><a href="{{ route('tambahwarga') }}">Tambah warga</a></small>
+
+        <hr>
       @else
         <select class="form-select" aria-label="Default select example" name="warga_id">
           @foreach ($wargas as $warga)

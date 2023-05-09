@@ -29,7 +29,7 @@ class DashboardController extends Controller
     {
         $data = $request->validate([
             'nama' => 'required|max:100|min:3',
-            'foto' => 'required|mimes:jpg,jpeg,png',
+            'foto' => 'required|file|mimes:jpg,jpeg,png',
             'nikah' => 'required',
             'jenis_kelamin' => 'required',
             'tanggal_lahir' => 'required'
