@@ -122,7 +122,7 @@
                                             <td>{{ $pekerjaan->warga->nama }}</td>
                                             <td>{{ $pekerjaan->pekerjaan }}</td>
                                             <td>{{ $pekerjaan->alamat }}</td>
-                                            <td>{{ $pekerjaan->gaji }}</td>
+                                            <td>@currency($pekerjaan->gaji)</td>
                                             <th><a href="{{ route('pekerjaan.edit', ['id' => $pekerjaan->id]) }}"
                                                     class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>
                                                     Edit</a></th>

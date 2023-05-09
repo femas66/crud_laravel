@@ -21,6 +21,6 @@ class LoginController extends Controller
             $request->session()->regenerate();
             return redirect()->route('dashboard');
         }
-        return back()->with('e', "Username / password salah");
+        return back()->with('e', "Username / password salah")->withInput();
     }
 }

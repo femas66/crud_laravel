@@ -212,12 +212,12 @@
             }
         </script>
 
-        <input type="password" required name="password" autofocus id="password" onkeyup="ceksama()">
+        <input type="password" name="password" autofocus id="password" onkeyup="ceksama()">
         <span></span>
         <label><i class="fa-solid fa-lock"></i> Password baru</label>
       </div>
       <div class="txt_field">
-        <input type="password" required name="password" autofocus id="confirmpassword" onkeyup="ceksama()">
+        <input type="password" name="password" autofocus id="confirmpassword" onkeyup="ceksama()">
         <span></span>
         <label><i class="fa-solid fa-lock"></i> Konfirmasi Password baru</label>
       </div>

@@ -191,12 +191,19 @@
       )
 </script>
 @endif
+@if ($message = session()->get('success'))
+  <script>
+    Swal.fire(
+      "Berhasil mereset password"
+    )
+  </script>  
+@endif
 <div class="center">
   <h1>Login</h1>
   <form method="post" action="{{ route('login.store') }}">
     @csrf
     <div class="txt_field">
-      <input type="text" required name="email" autofocus>
+      <input type="text" required name="email" autofocus value="{{ old('email') }}">
       <span></span>
       <label><i class="fa-solid fa-envelope"></i> Email</label>
     </div>

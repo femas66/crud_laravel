@@ -156,7 +156,7 @@
 
                       <td>{{ $pekerjaan->pekerjaan }}</td>
                       <td>{{ $pekerjaan->alamat }}</td>
-                      <td>{{ $pekerjaan->gaji }}</td>
+                      <td>@currency($pekerjaan->gaji)</td>
                     </tr>
                     @endforeach
                     @endif
