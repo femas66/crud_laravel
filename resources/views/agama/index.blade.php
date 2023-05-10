@@ -78,7 +78,7 @@
                                     <tr>
                                         <th>Foto</th>
                                         <th>Nama</th>
-                                        <th>Agama sekarang</th>
+                                        <th>Agama</th>
                                         <th colspan="2">
                                             <center>Aksi</center>
                                         </th>
