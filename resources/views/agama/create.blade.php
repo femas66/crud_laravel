@@ -18,7 +18,7 @@
         <div class="row align-items-stretch no-gutters contact-wrap">
           <div class="col-md-12">
             <div class="form h-100">
-              <h3>Tambah data vaksin</h3>
+              <h3>Tambah data agama</h3>
               <form class="mb-5" action="{{ route('agama.store') }}" method="post">
                 @csrf
                 <div class="row">
