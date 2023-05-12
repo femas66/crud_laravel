@@ -9,9 +9,24 @@ use Illuminate\Support\Facades\File;
 
 class DashboardController extends Controller
 {
+    function cari($tabel, $yangdicari = "") {
+        switch ($tabel) {
+            case 'warga':
+                if ($yangdicari == "") {
+                    return json_encode(Warga::all());
+                } else {
+
+                    return json_encode(Warga::where('nama', 'like', '%' . $yangdicari . '%')->get());
+                }
+                break;
+            default:
+                return json_encode('Tidak ditemukan');
+                break;
+        }
+    }
     public function index()
     {
-        $wargas = Warga::all();
+        $wargas = Warga::paginate(5);
         return view('dashboard', compact('wargas'));
     }
     public function logout(Request $request)
@@ -95,5 +110,8 @@ class DashboardController extends Controller
     {
         $warga = $id;
         return view('detail', compact('warga'));
+    }
+    public function nik(Warga $nik) {
+        return json_encode($nik);
     }
 }

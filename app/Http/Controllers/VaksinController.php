@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class VaksinController extends Controller
 {
     function index() {
-        $vaksins = VaksinWarga::all();
+        $vaksins = VaksinWarga::paginate(5);
         return view('vaksin.index', compact('vaksins'));
     }
     function create() {

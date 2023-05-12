@@ -163,12 +163,14 @@
   }
 </style>
 @if ($errors->any())
-@foreach ($errors->all() as $error)
 <div class="alert">
   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  {{ $error }}
+  <ul>
+  @foreach ($errors->all() as $error)
+    <li>{{ $error }}</li>
+  @endforeach
+  </ul>
 </div>
-@endforeach
 @endif
 @if (Session::get('e'))
 <script>
@@ -203,12 +205,12 @@
   <form method="post" action="{{ route('login.store') }}">
     @csrf
     <div class="txt_field">
-      <input type="text" required name="email" value="{{ old('email') }}">
+      <input type="text" name="email" value="{{ old('email') }}">
       <span></span>
       <label><i class="fa-solid fa-envelope"></i> Email</label>
     </div>
     <div class="txt_field">
-      <input type="password" required name="password">
+      <input type="password" name="password">
       <span></span>
       <label><i class="fa-solid fa-lock"></i> Password</label>
     </div>

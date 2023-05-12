@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class AgamaController extends Controller
 {
     function index() {
-        $agamas = AgamaWarga::all();
+        $agamas = AgamaWarga::paginate(5);
         return view('agama.index', compact('agamas'));
     }
     function create() {

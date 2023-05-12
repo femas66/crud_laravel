@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class HobiController extends Controller
 {
     function index() {
-        $hobis = HobiWarga::all();
+        $hobis = HobiWarga::paginate(5);
         return view('hobi.index', compact('hobis'));
     }
     function create() {

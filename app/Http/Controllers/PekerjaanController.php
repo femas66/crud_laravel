@@ -10,7 +10,7 @@ class PekerjaanController extends Controller
 {
     public function index()
     {
-        $pekerjaans = PekerjaanWarga::all();
+        $pekerjaans = PekerjaanWarga::paginate(5);
         return view('pekerjaan.index', compact('pekerjaans'));
     }
     public function create()

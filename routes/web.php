@@ -18,6 +18,9 @@ Route::post('/register', [RegisterController::class, 'store'])->middleware('gues
 Route::get('/forgot-password', [ForgotpasswordController::class, 'index'])->middleware('guest')->name('forgot-password.index');
 Route::post('/forgot-password', [ForgotpasswordController::class, 'store'])->middleware('guest')->name('forgot-password.store');
 Route::group(['middleware' => 'cekLogin'], function () {
+
+    Route::get('/cari/{tabel}/{yangdicari?}', [DashboardController::class, 'cari']);
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/logout', [DashboardController::class, 'logout'])->name('logout');
     Route::get('/tambahwarga', [DashboardController::class, 'tambahwarga'])->name('tambahwarga');
@@ -26,6 +29,8 @@ Route::group(['middleware' => 'cekLogin'], function () {
     Route::post('/editwarga/store', [DashboardController::class, 'actioneditwarga'])->name('editwarga');
     Route::get('/hapuswarga/id/{id}', [DashboardController::class, 'hapuswarga'])->name('warga.delete');
     Route::get('/detail/{id}', [DashboardController::class, 'detail'])->name('warga.detail');
+
+    Route::get('/nik/{nik}', [DashboardController::class, 'nik']);
     // Halaman pekerjaan
     Route::prefix('pekerjaan')->group(function () {
         Route::get('/', [PekerjaanController::class, 'index'])->name('pekerjaan.index');
