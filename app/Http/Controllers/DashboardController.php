@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AgamaWarga;
+use App\Models\PekerjaanWarga;
 use App\Models\Warga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,8 +17,23 @@ class DashboardController extends Controller
                 if ($yangdicari == "") {
                     return json_encode(Warga::all());
                 } else {
-
                     return json_encode(Warga::where('nama', 'like', '%' . $yangdicari . '%')->get());
+                }
+                break;
+            case 'pekerjaan':
+                if ($yangdicari == "") {
+                    return json_encode(PekerjaanWarga::all());
+                } else {
+                    return json_encode(PekerjaanWarga::where('pekerjaan', 'like', '%' . $yangdicari . '%')->get());
+
+                }
+                break;
+            case 'agama':
+                if ($yangdicari == "") {
+                    return json_encode(AgamaWarga::all());
+                }
+                else {
+                    return json_encode(AgamaWarga::where('agama_sekarang', 'like', '%' . $yangdicari . '%')->get());
                 }
                 break;
             default:

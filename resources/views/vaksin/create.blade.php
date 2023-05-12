@@ -12,8 +12,33 @@
     <link rel="stylesheet" href="/formtambah/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.js" integrity="sha512-6DC1eE3AWg1bgitkoaRM1lhY98PxbMIbhgYCGV107aZlyzzvaWCW1nJW2vDuYQm06hXrW0As6OGKcIaAVWnHJw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Contact Form #9</title>
-  </head>
-  <body>
+    <style>
+      .alert {
+        padding: 20px;
+        background-color: #ff1100; /* Red */
+        color: white;
+        margin-bottom: 15px;
+      }
+      
+      /* The close button */
+      .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      
+      /* When moving the mouse over the close button */
+      .closebtn:hover {
+        color: black;
+      }
+      </style>
+    </head>
+    <body style="background: #37306B;">
     <script>
       $(document).ready(function () {
         let warga_id = document.getElementById('warga_id').value;
@@ -55,6 +80,16 @@
           <div class="col-md-12">
             <div class="form h-100">
               <h3>Tambah data vaksin</h3>
+              @if ($errors->any())
+              <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <ul>
+                  @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                  @endforeach
+                </ul>
+              </div>
+              @endif
               <form class="mb-5" action="{{ route('vaksin.store') }}" method="post">
                 @csrf
                 <div class="row">
@@ -72,16 +107,11 @@
                     </select>
                     @endif
                   </div>
-                  @error('warga_id')
-                    <small style="color: red;">{{ $message }}</small>
-                    <hr>
-                  @enderror
+                  
                   <div class="col-md-6 form-group mb-3">
                     <label for="nik" class="col-form-label">NIK</label>
                     <input type="text" class="form-control" id="nik"  placeholder="NIK" readonly>
-                    @error('nik')
-                      <small style="color: red;">{{ $message }}</small>
-                    @enderror
+                    
                   </div>
                 </div>
                 <div class="form-check">
@@ -96,9 +126,7 @@
                     Belum vaksin
                   </label>
                 </div>
-                @error('vaksin')
-                    <small style="color: red;">{{ $message }}</small>
-                @enderror
+                
                 <hr>
                 <div class="row">
                   <div class="col-md-12 form-group">

@@ -12,8 +12,33 @@
     <link rel="stylesheet" href="/formtambah/css/style.css">
 
     <title>Contact Form #9</title>
-  </head>
-  <body>
+    <style>
+      .alert {
+        padding: 20px;
+        background-color: #ff1100; /* Red */
+        color: white;
+        margin-bottom: 15px;
+      }
+      
+      /* The close button */
+      .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      
+      /* When moving the mouse over the close button */
+      .closebtn:hover {
+        color: black;
+      }
+      </style>
+    </head>
+    <body style="background: #37306B;">
     <div class="content">
     
       <div class="container">
@@ -21,6 +46,16 @@
           <div class="col-md-12">
             <div class="form h-100">
               <h3>Tambah data hobi</h3>
+              @if ($errors->any())
+              <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <ul>
+                  @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                  @endforeach
+                </ul>
+              </div>
+              @endif
               <form class="mb-5" action="{{ route('hobi.update', ['id' => $hobi->id]) }}" method="post">
                 @csrf
                 @method('PUT')
@@ -39,17 +74,13 @@
                     </select>
                     @endif
                   </div>
-                  @error('warga_id')
-                    <small style="color: red;">{{ $message }}</small>
-                  @enderror
+    
                 </div>
                 <div class="row">
                   <div class="col-md-12 form-group mb-3">
                     <label for="" class="col-form-label">Hobi</label>
                     <input type="text" class="form-control" name="hobi" id="hobi" placeholder="Hobi" value="{{ $hobi->hobi }}">
-                    @error('hobi')
-                      <small style="color: red;">{{ $message }}</small>
-                    @enderror
+                  
                   </div>
                 </div>
                 <div class="row">

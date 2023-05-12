@@ -17,17 +17,17 @@
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link" href="/dashboard">
                 <i class="fa-solid fa-person"></i>
                 <span>Data Warga</span></a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link" href="/pekerjaan">
                 <i class="fa-solid fa-sack-dollar"></i>
                 <span>Data Pekerjaan</span></a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link" href="/hobi">
                 <i class="fa-solid fa-gamepad"></i>
                 <span>Data Hobi</span></a>
@@ -37,7 +37,7 @@
                 <i class="fa-solid fa-syringe"></i>
                 <span>Data Vaksin</span></a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link" href="/agama">
                 <i class="fa-solid fa-person-praying"></i>
                 <span>Data Agama</span></a>
@@ -65,7 +65,7 @@
                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                 <div class="input-group">
                     <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                        aria-label="Search" aria-describedby="basic-addon2">
+                        aria-label="Search" aria-describedby="basic-addon2" name="search">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button">
                             <i class="fas fa-search fa-sm"></i>
@@ -110,6 +110,7 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
+                                        <th>#</th>
                                         <th>Foto</th>
                                         <th>Nama</th>
                                         <th>NIK</th>
@@ -141,8 +142,9 @@
                                             }
                                     </script>
                                     @if(count($vaksins) != 0)
-                                        @foreach ($vaksins as $vaksin)
+                                        @foreach ($vaksins as $key => $vaksin)
                                         <tr>
+                                            <td>{{ $vaksins->firstItem() + $key }}</td>
                                             <td><img src="/img/{{ $vaksin->warga->foto }}" alt="" srcset="" width="80"
                                                     height="80"></td>
                                             <td>{{ $vaksin->warga->nama }}</td>
@@ -151,8 +153,7 @@
                                             <th><a href="{{ route('vaksin.edit', ['id' => $vaksin->id]) }}"
                                                     class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>
                                                     Edit</a></th>
-                                            <th><button onclick="cnfrm({{ $vaksin->id }})" class="btn btn-danger"><i
-                                                        class="fa-solid fa-trash"></i> Hapus</button></th>
+                                                    <th><form method="post" action="{{ route('vaksin.delete', ['id' => $vaksin->id]) }}"><button class="btn btn-danger" onclick="return confirm('Yakin mau hapus?')">@csrf @method('DELETE')<i class="fa-solid fa-trash"></i> Hapus</button></form></th>
                                         </tr>
                                         @endforeach
                                     @else

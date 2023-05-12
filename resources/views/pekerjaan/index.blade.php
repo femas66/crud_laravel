@@ -13,7 +13,7 @@
 <div id="wrapper">
     <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background: #37306B;">
         <hr class="sidebar-divider my-0">
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link" href="/dashboard">
                 <i class="fa-solid fa-person"></i>
                 <span>Data Warga</span></a>
@@ -23,17 +23,17 @@
                 <i class="fa-solid fa-sack-dollar"></i>
                 <span>Data Pekerjaan</span></a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link" href="/hobi">
                 <i class="fa-solid fa-gamepad"></i>
                 <span>Data Hobi</span></a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link" href="/vaksin">
                 <i class="fa-solid fa-syringe"></i>
                 <span>Data Vaksin</span></a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link" href="/agama">
                 <i class="fa-solid fa-person-praying"></i>
                 <span>Data Agama</span></a>
@@ -52,18 +52,19 @@
                 </button>
 
                 <!-- Topbar Search -->
-                <form
-                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                    <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                            aria-label="Search" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2" id="yangdicari" name="search">
+                                <input type="hidden" id="tabel" value="pekerjaan">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
@@ -95,14 +96,14 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-bordered" id="mytable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>Foto</th>
                                         <th>Nama Warga</th>
                                         <th>Pekerjaan</th>
-                                        <th>Alamat</th>
+                                        <th>Alamat pekerjaan</th>
                                         <th>Gaji</th>
                                         <th colspan="2">
                                             <center>Aksi</center>
@@ -131,14 +132,10 @@
                                             }
                                     </script>
                                     @if (count($pekerjaans) != 0)
-                                        @php
-                                        $i = 1;
-                                        @endphp
-                                        @foreach ($pekerjaans as $pekerjaan)
+                                        @foreach ($pekerjaans as $key => $pekerjaan)
                                         <tr>
-                                            <td>{{ $i++ }}</td>
-                                            <td><img src="/img/{{ $pekerjaan->warga->foto }}" alt="" srcset="" width="80"
-                                                    height="80"></td>
+                                            <td>{{ $pekerjaans->firstItem() + $key }}</td>
+                                            <td><img src="/img/{{ $pekerjaan->warga->foto }}" alt="" srcset="" width="80" height="80"></td>
                                             <td>{{ $pekerjaan->warga->nama }}</td>
                                             <td>{{ $pekerjaan->pekerjaan }}</td>
                                             <td>{{ $pekerjaan->alamat }}</td>
@@ -146,8 +143,7 @@
                                             <th><a href="{{ route('pekerjaan.edit', ['id' => $pekerjaan->id]) }}"
                                                     class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>
                                                     Edit</a></th>
-                                            <th><button onclick="cnfrm({{ $pekerjaan->id }})" class="btn btn-danger"><i
-                                                        class="fa-solid fa-trash"></i> Hapus</button></th>
+                                            <th><form method="post" action="{{ route('pekerjaan.delete', ['id' => $pekerjaan->id]) }}"><button class="btn btn-danger" onclick="return confirm('Yakin mau hapus?')">@csrf @method('DELETE')<i class="fa-solid fa-trash"></i> Hapus</button></form></th>
                                         </tr>
                                         @endforeach
                                     @else
@@ -158,7 +154,9 @@
                                     @endif
                                 </tbody>
                             </table>
-                           {{ $pekerjaans->links() }} 
+                            <div id="paginate">
+                                {{ $pekerjaans->links() }} 
+                            </div>
                         </div>
                     </div>
                 </div>

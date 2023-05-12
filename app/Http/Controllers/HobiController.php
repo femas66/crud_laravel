@@ -8,7 +8,11 @@ use Illuminate\Http\Request;
 
 class HobiController extends Controller
 {
-    function index() {
+    function index(Request $request) {
+        if ($request->has('search')) {
+            $hobis = HobiWarga::where('hobi', 'LIKE', '%' . $request->search . '%')->paginate(5);
+            return view('hobi.index', compact('hobis'));
+        }
         $hobis = HobiWarga::paginate(5);
         return view('hobi.index', compact('hobis'));
     }

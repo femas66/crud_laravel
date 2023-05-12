@@ -11,15 +11,48 @@
     <link rel="stylesheet" href="/formtambah/css/bootstrap.min.css">
     <link rel="stylesheet" href="/formtambah/css/style.css">
     <title>Contact Form #9</title>
-  </head>
-  <body>
-     <div class="content">
-    
+    <style>
+      .alert {
+        padding: 20px;
+        background-color: #ff1100; /* Red */
+        color: white;
+        margin-bottom: 15px;
+      }
+      
+      /* The close button */
+      .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      
+      /* When moving the mouse over the close button */
+      .closebtn:hover {
+        color: black;
+      }
+      </style>
+    </head>
+    <body style="background: #37306B;">
       <div class="container">
         <div class="row align-items-stretch no-gutters contact-wrap">
           <div class="col-md-12">
             <div class="form h-100">
               <h3>Tambah data hobi</h3>
+              @if ($errors->any())
+              <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <ul>
+                  @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                  @endforeach
+                </ul>
+              </div>
+              @endif
               <form class="mb-5" action="{{ route('pekerjaan.update', ['id' => $pekerjaan->id]) }}" method="post">
                 @method('PUT')
                 @csrf
@@ -38,34 +71,24 @@
                     </select>
                     @endif
                   </div>
-                  @error('warga_id')
-                    <small style="color: red;">{{ $message }}</small>
-                    <hr>
-                  @enderror
                 </div>
                 <div class="row">
                   <div class="col-md-6 form-group mb-3">
-                    <label for="nik" class="col-form-label">Pekerjaan</label>
+                    <label for="nik" class="col-form-label">Alamat Pekerjaan</label>
                     <input type="text" class="form-control" name="pekerjaan" id="nik"  placeholder="Pekerjaan" value="{{ $pekerjaan->pekerjaan }}">
-                    @error('pekerjaan')
-                      <small style="color: red;">{{ $message }}</small>
-                    @enderror
+          
                   </div>
                   <div class="col-md-6 form-group mb-3">
                     <label for="nik" class="col-form-label">Gaji</label>
                     <input type="text" class="form-control" name="gaji" id="nik"  placeholder="1x.xxx.xxx" value="{{ $pekerjaan->gaji }}">
-                    @error('gaji')
-                      <small style="color: red;">{{ $message }}</small>
-                    @enderror
+               
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-12 form-group mb-3">
                     <label for="message" class="col-form-label">Alamat</label>
                     <textarea class="form-control" name="alamat" id="message" cols="30" rows="4"  placeholder="Alamat">{{ $pekerjaan->alamat }}</textarea>
-                    @error('alamat')
-                      <small style="color: red;">{{ $message }}</small>
-                    @enderror
+            
                   </div>
                 </div>
                 <div class="row">

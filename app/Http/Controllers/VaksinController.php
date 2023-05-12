@@ -8,7 +8,11 @@ use Illuminate\Http\Request;
 
 class VaksinController extends Controller
 {
-    function index() {
+    function index(Request $request) {
+        if ($request->has('search')) {
+            $vaksins = VaksinWarga::where('vaksin', 'LIKE', $request->get('search'))->paginate(5);
+            return view('vaksin.index', compact('vaksins'));
+        }
         $vaksins = VaksinWarga::paginate(5);
         return view('vaksin.index', compact('vaksins'));
     }

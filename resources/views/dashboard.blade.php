@@ -29,22 +29,22 @@
                 <i class="fa-solid fa-person"></i>
                     <span>Data Warga</span></a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/pekerjaan">
                 <i class="fa-solid fa-sack-dollar"></i>
                     <span>Data Pekerjaan</span></a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/hobi">
                 <i class="fa-solid fa-gamepad"></i>
                     <span>Data Hobi</span></a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/vaksin">
                 <i class="fa-solid fa-syringe"></i>
                     <span>Data Vaksin</span></a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/agama">
                 <i class="fa-solid fa-person-praying"></i>
                     <span>Data Agama</span></a>
@@ -73,7 +73,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
                                 aria-label="Search" aria-describedby="basic-addon2" id="yangdicari">
-                                <input type="hidden" name="tabel" id="tabel" value="warga">
+                                <input type="hidden" id="tabel" value="warga">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button" id="btncari">
                                     <i class="fas fa-search fa-sm"></i>
@@ -147,19 +147,16 @@
                                             }
                                         </script>
                                         @if (count($wargas) > 0)
-                                        @php
-                                            $i = 1;
-                                        @endphp
-                                        @foreach ($wargas as $warga)
+                                        @foreach ($wargas as $key => $warga)
                                         <tr>
-                                            <td>{{ $i++ }}</td>
+                                            <td>{{ $wargas->firstItem() + $key }}</td>
                                             <td><img src="/img/{{ $warga->foto }}" alt="" srcset="" width="80" height="80"></td>
                                             <td>{{ $warga->nama }}</td>
                                             <td>{{ $warga->nik }}</td>
                                             <td>{{ ($warga->jenis_kelamin == 'L') ? "Laki-Laki" : "Perempuan" }}</td>
                                             <td>{{ $warga->tanggal_lahir }}</td>
                                             <th><a href="/editwarga/{{ $warga->id }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i> Edit</a></th>
-                                            <th><button class="btn btn-danger" onclick="cnfrm({{ $warga->id }})"><i class="fa-solid fa-trash"></i> Hapus</button></th>
+                                            <th><form method="post" action="{{ route('warga.delete', ['id' => $warga->id]) }}"><button class="btn btn-danger" onclick="return confirm('Yakin mau hapus?')">@csrf @method('DELETE')<i class="fa-solid fa-trash"></i> Hapus</button></form></th>
                                             <th><a class="btn btn-primary" href="{{ route('warga.detail', ['id' => $warga->id]) }}"><i class="fa-solid fa-circle-info"></i> Detail</a></th>
                                         </tr>
                                         @endforeach

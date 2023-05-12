@@ -45,7 +45,8 @@
     }
     </style>
   </head>
-  <body>
+  <body style="background: #37306B;">
+  
   <div class="content">
     
     <div class="container">
@@ -53,38 +54,37 @@
         <div class="col-md-12">
           <div class="form h-100">
             <h3>Tambah warga</h3>
+            @if ($errors->any())
+            <div class="alert">
+              <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+              <ul>
+              @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+              @endforeach
+              </ul>
+            </div>
+            @endif
             <form class="mb-5" action="{{ route('actiontambahwarga') }}" method="post" enctype="multipart/form-data">
               @csrf
               <div class="row">
                 <div class="col-md-6 form-group mb-3">
                   <label for="" class="col-form-label">Nama</label>
                   <input type="text" class="form-control" name="nama" id="name" placeholder="Nama" value="{{ old('nama') }}">
-                  @error('nama')
-                    <small style="color: red;">{{ $message }}</small>
-                  @enderror
+           
                 </div>
                 <div class="col-md-6 form-group mb-3">
                   <label for="nik" class="col-form-label">NIK</label>
                   <input type="text" class="form-control" name="nik" id="nik"  placeholder="NIK" value="{{ old('nik') }}">
-                  @error('nik')
-                    <small style="color: red;">{{ $message }}</small>
-                  @enderror
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6 form-group mb-3">
                   <label for="foto" class="col-form-label">Foto</label>
                   <input type="file" class="form-control" name="foto" id="foto">
-                  @error('foto')
-                      <small style="color: red;">{{ $message }}</small>
-                  @enderror
                 </div>
                 <div class="col-md-6 form-group mb-3">
                   <label for="tgl" class="col-form-label">Tanggal lahir</label>
                   <input type="date" class="form-control" name="tanggal_lahir" id="tgl"  value="{{ old('tanggal_lahir') }}">
-                  @error('tanggal_lahir')
-                    <small style="color: red;">{{ $message }}</small>
-                  @enderror
                 </div>
                 
               </div>
@@ -99,10 +99,8 @@
                 <label class="form-check-label" for="flexRadioDefault2">
                   Perempuan
                 </label>
+                
               </div>
-              @error('jenis_kelamin')
-                  <small style="color: red;">{{ $message }}</small>
-              @enderror
               <hr>
               <div class="row">
                 <div class="col-md-12 form-group">

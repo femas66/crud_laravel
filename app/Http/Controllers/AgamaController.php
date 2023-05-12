@@ -8,9 +8,12 @@ use Illuminate\Http\Request;
 
 class AgamaController extends Controller
 {
-    function index() {
+    function index(Request $request) {
         $agamas = AgamaWarga::paginate(5);
         return view('agama.index', compact('agamas'));
+        if($request->has('search')) {
+            dd('Oke');
+        }
     }
     function create() {
         $wargas = Warga::all();

@@ -11,14 +11,49 @@
     <link rel="stylesheet" href="/formtambah/css/bootstrap.min.css">
     <link rel="stylesheet" href="/formtambah/css/style.css">
     <title>Contact Form #9</title>
-  </head>
-  <body>
+    <style>
+      .alert {
+        padding: 20px;
+        background-color: #ff1100; /* Red */
+        color: white;
+        margin-bottom: 15px;
+      }
+      
+      /* The close button */
+      .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      
+      /* When moving the mouse over the close button */
+      .closebtn:hover {
+        color: black;
+      }
+      </style>
+    </head>
+    <body style="background: #37306B;">
     <div class="content">
       <div class="container">
         <div class="row align-items-stretch no-gutters contact-wrap">
           <div class="col-md-12">
             <div class="form h-100">
               <h3>Tambah data agama</h3>
+              @if ($errors->any())
+              <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <ul>
+                  @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                  @endforeach
+                </ul>
+              </div>
+              @endif
               <form class="mb-5" action="{{ route('agama.update', ['id' => $agama->id]) }}" method="post">
                 @csrf
                 @method("PUT")
@@ -37,10 +72,6 @@
                     </select>
                     @endif
                   </div>
-                  @error('warga_id')
-                    <small style="color: red;">{{ $message }}</small>
-                    <hr>
-                  @enderror
                 </div>
                 <div class="row">
                   <div class="col-md-12 form-group mb-3">

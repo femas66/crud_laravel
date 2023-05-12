@@ -8,8 +8,13 @@ use Illuminate\Http\Request;
 
 class PekerjaanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->has('search')) {
+            $pekerjaans = PekerjaanWarga::where('pekerjaan', 'LIKE', '%' . $request->get('search') . '%')->paginate(5);
+            
+            return view('pekerjaan.index', compact('pekerjaans'));
+        }
         $pekerjaans = PekerjaanWarga::paginate(5);
         return view('pekerjaan.index', compact('pekerjaans'));
     }

@@ -16,12 +16,12 @@
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link" href="/dashboard">
                 <i class="fa-solid fa-person"></i>
                 <span>Data Warga</span></a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link" href="/pekerjaan">
                 <i class="fa-solid fa-sack-dollar"></i>
                 <span>Data Pekerjaan</span></a>
@@ -31,12 +31,12 @@
                 <i class="fa-solid fa-gamepad"></i>
                 <span>Data Hobi</span></a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link" href="/vaksin">
                 <i class="fa-solid fa-syringe"></i>
                 <span>Data Vaksin</span></a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link" href="/agama">
                 <i class="fa-solid fa-person-praying"></i>
                 <span>Data Agama</span></a>
@@ -63,7 +63,7 @@
                     class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div class="input-group">
                         <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                            aria-label="Search" aria-describedby="basic-addon2">
+                            aria-label="Search" aria-describedby="basic-addon2" name="search">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="button">
                                 <i class="fas fa-search fa-sm"></i>
@@ -140,21 +140,20 @@
                                             }
                                     </script>
                                     @if (count($hobis) != 0)
-                                        @php
-                                        $i = 1;
-                                        @endphp
-                                        @foreach ($hobis as $hobi)
+                                        @foreach ($hobis as $key => $hobi)
                                         <tr>
-                                            <td>{{ $i++ }}</td>
-                                            <td><img src="/img/{{ $hobi->warga->foto }}" alt="" srcset="" width="80"
-                                                    height="80"></td>
+                                            <td>{{ $hobis->firstItem() + $key }}</td>
+                                            <td><img src="/img/{{ $hobi->warga->foto }}" alt="" srcset="" width="80" height="80"></td>
                                             <td>{{ $hobi->warga->nama }}</td>
                                             <td>{{ $hobi->hobi }}</td>
-                                            <th><a href="{{ route('hobi.edit', ['id' => $hobi->id]) }}"
-                                                    class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>
-                                                    Edit</a></th>
-                                            <th><button onclick="cnfrm({{ $hobi->id }})" class="btn btn-danger"><i
-                                                        class="fa-solid fa-trash"></i> Hapus</button></th>
+                                            <th><a href="{{ route('hobi.edit', ['id' => $hobi->id]) }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i> Edit</a></th>
+                                            <th>
+                                                <form method="post" action="{{ route('hobi.delete', ['id' => $hobi->id]) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger" onclick="return confirm('Yakin mau hapus?')"><i class="fa-solid fa-trash"></i> Hapus</button>
+                                                </form>
+                                            </th>
                                         </tr>
                                         @endforeach
                                     @else
