@@ -81,7 +81,7 @@
                   </div>
                   <div class="col-md-6 form-group mb-3">
                     <label for="nik" class="col-form-label">Gaji</label>
-                    <input type="text" class="form-control" name="gaji" id="nik"  placeholder="1x.xxx.xxx" value="{{ old('gaji') }}">
+                    <input type="number" class="form-control" name="gaji" id="nik"  placeholder="1x.xxx.xxx" value="{{ old('gaji') }}">
                
                   </div>
                 </div>

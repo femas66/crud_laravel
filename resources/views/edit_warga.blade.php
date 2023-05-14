@@ -54,7 +54,6 @@
           <div class="form h-100">
             <h3>Tambah warga</h3>
             @if ($errors->any())
-      
             <div class="alert">
               <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
               <ul>

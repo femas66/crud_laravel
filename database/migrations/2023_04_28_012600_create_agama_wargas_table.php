@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('agama_warga', function (Blueprint $table) {
             $table->id();
             $table->unique('warga_id');
-            $table->foreignId('warga_id')->constrained('warga', 'id')->onDelete('cascade')->onDelete('cascade');
+            $table->foreignId('warga_id')->constrained('warga', 'id')->onDelete('restrict')->onDelete('restrict');
             $table->string('agama_sekarang');
             $table->timestamps();
         });

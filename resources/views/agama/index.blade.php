@@ -111,24 +111,25 @@
                                 </thead>
                                 <tbody>
                                     <script>
-                                        function cnfrm(id) {
-                                                
-                                                Swal.fire({
-                                                title: 'Are you sure?',
-                                                text: "You won't be able to revert this!",
+                                        function konfirmasiHapus(event) {
+                                            event.preventDefault(); // Menghentikan submit form
+
+                                            Swal.fire({
+                                                title: 'Konfirmasi',
+                                                text: 'Anda yakin ingin menghapus data ini?',
                                                 icon: 'warning',
                                                 showCancelButton: true,
                                                 confirmButtonColor: '#3085d6',
                                                 cancelButtonColor: '#d33',
-                                                confirmButtonText: 'Yes, delete it!'
-                                                }).then((result) => {
+                                                confirmButtonText: 'Ya, hapus!',
+                                                cancelButtonText: 'Batal'
+                                            }).then((result) => {
                                                 if (result.isConfirmed) {
-                                                    window.location = `/agama/${id.toString()}`
-                                                    console.log("oke");
+                                                // Kode untuk melakukan penghapusan data di sini
+                                                document.getElementById("myForm").submit(); // Melanjutkan submit form setelah konfirmasi
                                                 }
-                                                
-                                                })
-                                            }
+                                            });
+                                        }
                                     </script>
                                     @if (count($agamas) != 0)
                                         @foreach ($agamas as $key => $agama)
@@ -141,7 +142,7 @@
                                             <th><a href="{{ route('agama.edit', ['id' => $agama->id]) }}"
                                                     class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>
                                                     Edit</a></th>
-                                                    <th><form method="post" action="{{ route('agama.delete', ['id' => $agama->id]) }}"><button class="btn btn-danger" onclick="return confirm('Yakin mau hapus?')">@csrf @method('DELETE')<i class="fa-solid fa-trash"></i> Hapus</button></form></th>
+                                                    <th><form method="post" action="{{ route('agama.delete', ['id' => $agama->id]) }}" id="myForm" onsubmit="konfirmasiHapus(event)"><button class="btn btn-danger" type="submit">@csrf @method('DELETE')<i class="fa-solid fa-trash"></i> Hapus</button></form></th>
                                         </tr>
                                         @endforeach
                                     @else

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('hobi_warga', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('warga_id')->constrained('warga', 'id')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('warga_id')->constrained('warga', 'id')->onDelete('restrict')->onUpdate('restrict');
             $table->string('hobi');
             $table->timestamps();
         });

@@ -12,7 +12,8 @@ class PekerjaanController extends Controller
     {
         if ($request->has('search')) {
             $pekerjaans = PekerjaanWarga::where('pekerjaan', 'LIKE', '%' . $request->get('search') . '%')->paginate(5);
-            
+            $pekerjaans->appends(['search' => $request->search]);
+            session(['search' => $request->search]);
             return view('pekerjaan.index', compact('pekerjaans'));
         }
         $pekerjaans = PekerjaanWarga::paginate(5);
@@ -29,7 +30,7 @@ class PekerjaanController extends Controller
             'warga_id' => 'required',
             'pekerjaan' => 'required',
             'alamat' => 'required',
-            'gaji' => 'required'
+            'gaji' => 'required|numeric'
         ], [
             'warga_id.required' => 'Belum ada data warga'
         ]);
@@ -49,7 +50,7 @@ class PekerjaanController extends Controller
             'warga_id' => 'required',
             'pekerjaan' => 'required',
             'alamat' => 'required',
-            'gaji' => 'required'
+            'gaji' => 'required|numeric'
         ]);
         PekerjaanWarga::find($id)->update($data);
         return redirect()->route('pekerjaan.index')->with('update', 'update');

@@ -65,7 +65,7 @@
                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                 <div class="input-group">
                     <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                        aria-label="Search" aria-describedby="basic-addon2" name="search">
+                        aria-label="Search" aria-describedby="basic-addon2" name="search" value="{{session('search')}}">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button">
                             <i class="fas fa-search fa-sm"></i>
@@ -122,24 +122,25 @@
                                 </thead>
                                 <tbody>
                                     <script>
-                                        function cnfrm(id) {
-                                                
-                                                Swal.fire({
-                                                title: 'Are you sure?',
-                                                text: "You won't be able to revert this!",
+                                        function konfirmasiHapus(event) {
+                                            event.preventDefault(); // Menghentikan submit form
+
+                                            Swal.fire({
+                                                title: 'Konfirmasi',
+                                                text: 'Anda yakin ingin menghapus data ini?',
                                                 icon: 'warning',
                                                 showCancelButton: true,
                                                 confirmButtonColor: '#3085d6',
                                                 cancelButtonColor: '#d33',
-                                                confirmButtonText: 'Yes, delete it!'
-                                                }).then((result) => {
+                                                confirmButtonText: 'Ya, hapus!',
+                                                cancelButtonText: 'Batal'
+                                            }).then((result) => {
                                                 if (result.isConfirmed) {
-                                                    window.location = `/vaksin/${id.toString()}`
-                                                    console.log("oke");
+                                                // Kode untuk melakukan penghapusan data di sini
+                                                document.getElementById("myForm").submit(); // Melanjutkan submit form setelah konfirmasi
                                                 }
-                                                
-                                                })
-                                            }
+                                            });
+                                        }
                                     </script>
                                     @if(count($vaksins) != 0)
                                         @foreach ($vaksins as $key => $vaksin)
@@ -153,7 +154,7 @@
                                             <th><a href="{{ route('vaksin.edit', ['id' => $vaksin->id]) }}"
                                                     class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>
                                                     Edit</a></th>
-                                                    <th><form method="post" action="{{ route('vaksin.delete', ['id' => $vaksin->id]) }}"><button class="btn btn-danger" onclick="return confirm('Yakin mau hapus?')">@csrf @method('DELETE')<i class="fa-solid fa-trash"></i> Hapus</button></form></th>
+                                                    <th><form method="post" action="{{ route('vaksin.delete', ['id' => $vaksin->id]) }}" onsubmit="konfirmasiHapus(event)" id="myForm"><button class="btn btn-danger" type="submit" >@csrf @method('DELETE')<i class="fa-solid fa-trash"></i> Hapus</button></form></th>
                                         </tr>
                                         @endforeach
                                     @else

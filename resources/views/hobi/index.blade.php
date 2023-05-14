@@ -63,7 +63,7 @@
                     class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div class="input-group">
                         <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                            aria-label="Search" aria-describedby="basic-addon2" name="search">
+                            aria-label="Search" aria-describedby="basic-addon2" name="search" value="{{ session('search') }}">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="button">
                                 <i class="fas fa-search fa-sm"></i>
@@ -120,24 +120,25 @@
                                 </thead>
                                 <tbody>
                                     <script>
-                                        function cnfrm(id) {
-                                                
-                                                Swal.fire({
-                                                title: 'Are you sure?',
-                                                text: "You won't be able to revert this!",
+                                        function konfirmasiHapus(event) {
+                                            event.preventDefault(); // Menghentikan submit form
+
+                                            Swal.fire({
+                                                title: 'Konfirmasi',
+                                                text: 'Anda yakin ingin menghapus data ini?',
                                                 icon: 'warning',
                                                 showCancelButton: true,
                                                 confirmButtonColor: '#3085d6',
                                                 cancelButtonColor: '#d33',
-                                                confirmButtonText: 'Yes, delete it!'
-                                                }).then((result) => {
+                                                confirmButtonText: 'Ya, hapus!',
+                                                cancelButtonText: 'Batal'
+                                            }).then((result) => {
                                                 if (result.isConfirmed) {
-                                                    window.location = `/hobi/${id.toString()}`
-                                                    console.log("oke");
+                                                // Kode untuk melakukan penghapusan data di sini
+                                                document.getElementById("myForm").submit(); // Melanjutkan submit form setelah konfirmasi
                                                 }
-                                                
-                                                })
-                                            }
+                                            });
+                                        }
                                     </script>
                                     @if (count($hobis) != 0)
                                         @foreach ($hobis as $key => $hobi)
@@ -148,10 +149,10 @@
                                             <td>{{ $hobi->hobi }}</td>
                                             <th><a href="{{ route('hobi.edit', ['id' => $hobi->id]) }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i> Edit</a></th>
                                             <th>
-                                                <form method="post" action="{{ route('hobi.delete', ['id' => $hobi->id]) }}">
+                                                <form method="post" action="{{ route('hobi.delete', ['id' => $hobi->id]) }}" id="myForm" onsubmit="konfirmasiHapus(event)">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button class="btn btn-danger" onclick="return confirm('Yakin mau hapus?')"><i class="fa-solid fa-trash"></i> Hapus</button>
+                                                    <button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i> Hapus</button>
                                                 </form>
                                             </th>
                                         </tr>

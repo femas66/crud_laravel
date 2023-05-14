@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AgamaWarga;
 use App\Models\PekerjaanWarga;
 use App\Models\Warga;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\File;
 class DashboardController extends Controller
 {
     function cari($tabel, $yangdicari = "") {
+        session(['search' => $yangdicari]);
         switch ($tabel) {
             case 'warga':
                 if ($yangdicari == "") {
@@ -41,8 +43,14 @@ class DashboardController extends Controller
                 break;
         }
     }
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->has('search')) {
+            $wargas = Warga::where('nama', 'LIKE', '%' . $request->get('search') . '%')->paginate(5);
+            $wargas->appends(['search' => $request->search]);
+            session(['search' => $request->search]);
+            return view('dashboard', compact('wargas'));
+        }
         $wargas = Warga::paginate(5);
         return view('dashboard', compact('wargas'));
     }
@@ -61,10 +69,12 @@ class DashboardController extends Controller
     {
         $data = $request->validate([
             'nama' => 'required|max:100|min:3',
-            'foto' => 'required|file|mimes:jpg,jpeg,png',
-            'nik' => 'required|unique:warga,nik',
+            'foto' => 'required|file|mimes:jpg,jpeg,png|max:5120',
+            'nik' => 'required|unique:warga,nik|numeric|digits_between:10,9999999999|',
             'jenis_kelamin' => 'required',
             'tanggal_lahir' => 'required'
+        ],[
+            'foto.max' => 'Maksimal 5MB'
         ]);
         $file = $request->file('foto');
         $name = $file->hashName();
@@ -85,10 +95,12 @@ class DashboardController extends Controller
         if ($re->has('foto')) {
             $data = $re->validate([
                 'nama' => 'required|max:100|min:3',
-                'foto' => 'required|mimes:jpeg,png,jpg',
-                'nik' => 'required|unique:warga,nik,' . $re->id,
+                'foto' => 'required|mimes:jpeg,png,jpg|max:5120',
+                'nik' => 'required|numeric|digits_between:10,9999999999|unique:warga,nik,' . $re->id,
                 'jenis_kelamin' => 'required',
                 'tanggal_lahir' => 'required'
+            ],[
+                'foto.max' => 'Maksimal 5MB'
             ]);
             $a = Warga::find($re->id);
             if (File::exists(public_path('img/' . $a->foto))) {
@@ -114,12 +126,17 @@ class DashboardController extends Controller
     public function hapuswarga($id)
     {
         if (Warga::where('id', $id)->count() > 0) {
-            $data = Warga::find($id);
-            if (File::exists(public_path('img/' . $data->foto))) {
-                unlink(public_path('img/' . $data->foto));
+            try {
+                $data = Warga::find($id);
+                $data->delete();
+                if (File::exists(public_path('img/' . $data->foto))) {
+                    unlink(public_path('img/' . $data->foto));
+                }
+                return redirect()->route('dashboard');
+            } catch (QueryException $e) {
+                return back()->withErrors(['errorrestrict' => 'Data masih digunakan']);
             }
-            $data->delete();
-            return redirect()->route('dashboard');
+            
         }
         return redirect()->route('dashboard');
     }

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('vaksin_warga', function (Blueprint $table) {
             $table->id();
             $table->unique('warga_id');
-            $table->foreignId('warga_id')->constrained('warga', 'id')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('warga_id')->constrained('warga', 'id')->onDelete('restrict')->onUpdate('restrict');
             $table->enum('vaksin', ['Y', 'N']);
             $table->timestamps();
         });

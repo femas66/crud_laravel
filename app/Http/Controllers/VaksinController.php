@@ -11,6 +11,8 @@ class VaksinController extends Controller
     function index(Request $request) {
         if ($request->has('search')) {
             $vaksins = VaksinWarga::where('vaksin', 'LIKE', $request->get('search'))->paginate(5);
+            $vaksins->appends(['search' => $request->search]);
+            session(['search' => $request->search]);
             return view('vaksin.index', compact('vaksins'));
         }
         $vaksins = VaksinWarga::paginate(5);

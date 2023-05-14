@@ -1,12 +1,5 @@
 @extends('layout.halaman')
 @section('body')
-@if ($errors->any())
-    @foreach ($errors->all() as $error)
-        <div class="alert alert-warning" role="alert">
-            {{ $error }}
-        </div>
-    @endforeach
-@endif
 @if (Session::get('tambah'))
     <script>
         Swal.fire('Berhasil menambah data')
@@ -72,10 +65,9 @@
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2" id="yangdicari">
-                                <input type="hidden" id="tabel" value="warga">
+                                aria-label="Search" aria-describedby="basic-addon2" name="search" value="{{session('search')}}">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" id="btncari">
+                                <button class="btn btn-primary" type="button">
                                     <i class="fas fa-search fa-sm"></i>
                                 </button>
                             </div>
@@ -104,8 +96,18 @@
                     </ul>
     
                 </nav>
-                <!-- Begin Page Content -->
                 <div class="container-fluid">         
+                
+                    @if ($errors->any())
+                        <div class="alert">
+                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                            <ul>
+                        @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <!-- Page Heading -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -122,28 +124,28 @@
                                             <th>NIK</th>
                                             <th>Jenis kelamin</th>
                                             <th>Tanggal Lahir</th>
-                                            <th colspan="3"><center>Aksi</center></th>
+                                            <th colspan="2"><center>Aksi</center></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <script>
-                                            function cnfrm(id) {
-                                                console.log(`/hapuswarga/id/${id.toString()}`);
+                                            function konfirmasiHapus(event) {
+                                                event.preventDefault();
                                                 Swal.fire({
-                                                title: 'Are you sure?',
-                                                text: "You won't be able to revert this!",
-                                                icon: 'warning',
-                                                showCancelButton: true,
-                                                confirmButtonColor: '#3085d6',
-                                                cancelButtonColor: '#d33',
-                                                confirmButtonText: 'Yes, delete it!'
+                                                    title: 'Konfirmasi',
+                                                    text: 'Anda yakin ingin menghapus data ini?',
+                                                    icon: 'warning',
+                                                    showCancelButton: true,
+                                                    confirmButtonColor: '#3085d6',
+                                                    cancelButtonColor: '#d33',
+                                                    confirmButtonText: 'Ya, hapus!',
+                                                    cancelButtonText: 'Batal'
                                                 }).then((result) => {
-                                                if (result.isConfirmed) {
-                                                    window.location = `/hapuswarga/id/${id.toString()}`
-                                                    console.log("oke");
-                                                }
-                                                
-                                                })
+                                                    if (result.isConfirmed) {
+                                                    // Kode untuk melakukan penghapusan data di sini
+                                                    document.getElementById("myForm").submit(); // Melanjutkan submit form setelah konfirmasi
+                                                    }
+                                                });
                                             }
                                         </script>
                                         @if (count($wargas) > 0)
@@ -156,8 +158,13 @@
                                             <td>{{ ($warga->jenis_kelamin == 'L') ? "Laki-Laki" : "Perempuan" }}</td>
                                             <td>{{ $warga->tanggal_lahir }}</td>
                                             <th><a href="/editwarga/{{ $warga->id }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i> Edit</a></th>
-                                            <th><form method="post" action="{{ route('warga.delete', ['id' => $warga->id]) }}"><button class="btn btn-danger" onclick="return confirm('Yakin mau hapus?')">@csrf @method('DELETE')<i class="fa-solid fa-trash"></i> Hapus</button></form></th>
-                                            <th><a class="btn btn-primary" href="{{ route('warga.detail', ['id' => $warga->id]) }}"><i class="fa-solid fa-circle-info"></i> Detail</a></th>
+                                            <th>
+                                                <form method="post" action="{{ route('warga.delete', ['id' => $warga->id]) }}" id="myForm" onsubmit="konfirmasiHapus(event)">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i> Hapus</button>
+                                                </form>
+                                            </th>
                                         </tr>
                                         @endforeach
                                         @else
