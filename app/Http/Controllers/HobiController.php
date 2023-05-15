@@ -15,7 +15,7 @@ class HobiController extends Controller
             $keyword = $request->search;
             $jobs = HobiWarga::whereHas('warga', function ($query) use ($keyword) {
                 $query->where('nama', 'LIKE', '%'.$keyword.'%');
-            })->orWhere('hobi', 'LIKE', '%'.$keyword.'%')->paginate(5);
+            })->paginate(5);
             $jobs->appends(['search' => $keyword]);
             session(['search' => $request->search]);
             return view('hobi.index', ['hobis' => $jobs]);
@@ -33,7 +33,7 @@ class HobiController extends Controller
         // dd($request->all());
         $data = $request->validate([
             'warga_id' => 'required',
-            'hobi' => 'required|alpha_spaces'
+            'hobi' => 'required|min:3|alpha_spaces'
         ], [
             'warga_id.required' => 'Belum ada data warga'
         ]);
@@ -51,7 +51,7 @@ class HobiController extends Controller
         // dd($request->all());
         $data = $request->validate([
             'warga_id' => 'required',
-            'hobi' => 'required|alpha_spaces'
+            'hobi' => 'required|min:3|alpha_spaces'
         ], [
             'warga_id.required' => 'Belum ada data warga'
         ]);

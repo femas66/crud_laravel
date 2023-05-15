@@ -22,7 +22,8 @@ class VaksinController extends Controller
         return view('vaksin.index', compact('vaksins'));
     }
     function create() {
-        $wargas = Warga::all();
+        $warga_yang_sudah_vaksin = VaksinWarga::pluck('warga_id');
+        $wargas = Warga::whereNotIn('id', $warga_yang_sudah_vaksin)->get();
         return view('vaksin.create', compact('wargas'));
     }
     function store(Request $request) {

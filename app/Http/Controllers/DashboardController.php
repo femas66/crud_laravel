@@ -74,6 +74,7 @@ class DashboardController extends Controller
             'jenis_kelamin' => 'required',
             'tanggal_lahir' => 'required'
         ],[
+            'nik.digits_between' => 'NIK minimal 10 digit',
             'nama.alpha_spaces' => 'Nama tidak boleh ada angka',
             'foto.max' => 'Maksimal 5MB'
         ]);
@@ -101,6 +102,7 @@ class DashboardController extends Controller
                 'jenis_kelamin' => 'required',
                 'tanggal_lahir' => 'required'
             ],[
+                'nik.digits_between' => 'NIK minimal 10 digit',
                 'nama.alpha_spaces' => 'Nama tidak boleh ada angka',
                 'foto.max' => 'Maksimal 5MB'
             ]);

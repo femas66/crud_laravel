@@ -14,7 +14,7 @@ class PekerjaanController extends Controller
             $keyword = $request->search;
             $pekerjaans = PekerjaanWarga::whereHas('warga', function ($query) use ($keyword) {
                 $query->where('nama', 'LIKE', '%'.$keyword.'%');
-            })->orWhere('pekerjaan', 'LIKE', '%'.$keyword.'%')->paginate(5);
+            })->paginate(5);
             $pekerjaans->appends(['search' => $keyword]);
             session(['search' => $request->search]);
             return view('pekerjaan.index', compact('pekerjaans'));
@@ -36,8 +36,8 @@ class PekerjaanController extends Controller
     {
         $data = $request->validate([
             'warga_id' => 'required',
-            'pekerjaan' => 'required|alpha_spaces',
-            'alamat' => 'required',
+            'pekerjaan' => 'required|min:3|alpha_spaces',
+            'alamat' => 'required|min:5',
             'gaji' => 'required|numeric'
         ], [
             'warga_id.required' => 'Belum ada data warga'
@@ -56,8 +56,8 @@ class PekerjaanController extends Controller
         
         $data = $request->validate([
             'warga_id' => 'required',
-            'pekerjaan' => 'required|alpha_spaces',
-            'alamat' => 'required',
+            'pekerjaan' => 'required|min:3|alpha_spaces',
+            'alamat' => 'required|min:5',
             'gaji' => 'required|numeric'
         ]);
         PekerjaanWarga::find($id)->update($data);

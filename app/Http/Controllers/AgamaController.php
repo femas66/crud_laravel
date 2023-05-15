@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AgamaWarga;
+use App\Models\VaksinWarga;
 use App\Models\Warga;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,8 @@ class AgamaController extends Controller
         return view('agama.index', compact('agamas'));
     }
     function create() {
-        $wargas = Warga::all();
+        $warga_yang_sudah_vaksin = AgamaWarga::pluck('warga_id');
+        $wargas = Warga::whereNotIn('id', $warga_yang_sudah_vaksin)->get();
         return view('agama.create', compact('wargas'));
     }
     function store(Request $request) {
