@@ -11,10 +11,13 @@ class AgamaController extends Controller
     function index(Request $request) {
         
         if($request->has('search')) {
-            $agamas = AgamaWarga::where('agama_sekarang', 'LIKE', '%' . $request->search . '%')->paginate(5);
-            $agamas->appends(['search' => $request->input('search')]);
+            $keyword = $request->search;
+            $jobs = AgamaWarga::whereHas('warga', function ($query) use ($keyword) {
+                $query->where('nama', 'LIKE', '%'.$keyword.'%');
+            })->paginate(5);
+            $jobs->appends(['search' => $keyword]);
             session(['search' => $request->search]);
-            return view('agama.index', compact('agamas'));
+            return view('agama.index', ['agamas' => $jobs]);
         }
         $agamas = AgamaWarga::paginate(5);
         return view('agama.index', compact('agamas'));

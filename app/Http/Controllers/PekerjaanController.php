@@ -11,10 +11,18 @@ class PekerjaanController extends Controller
     public function index(Request $request)
     {
         if ($request->has('search')) {
-            $pekerjaans = PekerjaanWarga::where('pekerjaan', 'LIKE', '%' . $request->get('search') . '%')->paginate(5);
-            $pekerjaans->appends(['search' => $request->search]);
+            $keyword = $request->search;
+            $pekerjaans = PekerjaanWarga::whereHas('warga', function ($query) use ($keyword) {
+                $query->where('nama', 'LIKE', '%'.$keyword.'%');
+            })->orWhere('pekerjaan', 'LIKE', '%'.$keyword.'%')->paginate(5);
+            $pekerjaans->appends(['search' => $keyword]);
             session(['search' => $request->search]);
             return view('pekerjaan.index', compact('pekerjaans'));
+
+            // $pekerjaans = PekerjaanWarga::where('warga_id', $id)->paginate(5);
+            // $pekerjaans->appends(['search' => $request->search]);
+            // session(['search' => $request->search]);
+            // return view('pekerjaan.index', compact('pekerjaans'));
         }
         $pekerjaans = PekerjaanWarga::paginate(5);
         return view('pekerjaan.index', compact('pekerjaans'));
@@ -28,7 +36,7 @@ class PekerjaanController extends Controller
     {
         $data = $request->validate([
             'warga_id' => 'required',
-            'pekerjaan' => 'required',
+            'pekerjaan' => 'required|alpha_spaces',
             'alamat' => 'required',
             'gaji' => 'required|numeric'
         ], [
@@ -48,7 +56,7 @@ class PekerjaanController extends Controller
         
         $data = $request->validate([
             'warga_id' => 'required',
-            'pekerjaan' => 'required',
+            'pekerjaan' => 'required|alpha_spaces',
             'alamat' => 'required',
             'gaji' => 'required|numeric'
         ]);

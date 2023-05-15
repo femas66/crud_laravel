@@ -10,10 +10,13 @@ class VaksinController extends Controller
 {
     function index(Request $request) {
         if ($request->has('search')) {
-            $vaksins = VaksinWarga::where('vaksin', 'LIKE', $request->get('search'))->paginate(5);
-            $vaksins->appends(['search' => $request->search]);
+            $keyword = $request->search;
+            $jobs = VaksinWarga::whereHas('warga', function ($query) use ($keyword) {
+                $query->where('nama', 'LIKE', '%'.$keyword.'%');
+            })->paginate(5);
+            $jobs->appends(['search' => $keyword]);
             session(['search' => $request->search]);
-            return view('vaksin.index', compact('vaksins'));
+            return view('vaksin.index', ['vaksins' => $jobs]);
         }
         $vaksins = VaksinWarga::paginate(5);
         return view('vaksin.index', compact('vaksins'));

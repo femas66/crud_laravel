@@ -68,12 +68,13 @@ class DashboardController extends Controller
     public function actiontambahwarga(Request $request)
     {
         $data = $request->validate([
-            'nama' => 'required|max:100|min:3',
+            'nama' => 'required|max:100|min:3|alpha_spaces',
             'foto' => 'required|file|mimes:jpg,jpeg,png|max:5120',
             'nik' => 'required|unique:warga,nik|numeric|digits_between:10,9999999999|',
             'jenis_kelamin' => 'required',
             'tanggal_lahir' => 'required'
         ],[
+            'nama.alpha_spaces' => 'Nama tidak boleh ada angka',
             'foto.max' => 'Maksimal 5MB'
         ]);
         $file = $request->file('foto');
@@ -94,12 +95,13 @@ class DashboardController extends Controller
         $data = [];
         if ($re->has('foto')) {
             $data = $re->validate([
-                'nama' => 'required|max:100|min:3',
+                'nama' => 'required|max:100|min:3|alpha_spaces',
                 'foto' => 'required|mimes:jpeg,png,jpg|max:5120',
                 'nik' => 'required|numeric|digits_between:10,9999999999|unique:warga,nik,' . $re->id,
                 'jenis_kelamin' => 'required',
                 'tanggal_lahir' => 'required'
             ],[
+                'nama.alpha_spaces' => 'Nama tidak boleh ada angka',
                 'foto.max' => 'Maksimal 5MB'
             ]);
             $a = Warga::find($re->id);
@@ -112,10 +114,12 @@ class DashboardController extends Controller
             $file->move(public_path('img'), $name);
         } else {
             $data = $re->validate([
-                'nama' => 'required|max:255|min:3',
-                'nik' => 'required|unique:warga,nik,' . $re->id,
+                'nama' => 'required|max:255|min:3|alpha_spaces',
+                'nik' => 'required|digits_between:10,9999999999|unique:warga,nik,' . $re->id,
                 'jenis_kelamin' => 'required',
                 'tanggal_lahir' => 'required'
+            ], [
+                'nama.alpha_spaces' => 'Nama tidak boleh ada angka',
             ]);
         }
         $data['tanggal_lahir'] = date('d-m-Y', strtotime($re->input('tanggal_lahir')));

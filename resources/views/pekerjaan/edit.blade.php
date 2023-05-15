@@ -74,7 +74,7 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6 form-group mb-3">
-                    <label for="nik" class="col-form-label">Alamat Pekerjaan</label>
+                    <label for="nik" class="col-form-label">Pekerjaan</label>
                     <input type="text" class="form-control" name="pekerjaan" id="nik"  placeholder="Pekerjaan" value="{{ $pekerjaan->pekerjaan }}">
           
                   </div>

@@ -160,7 +160,7 @@
                                     @else
                                         
                                         <tr>
-                                            <td colspan="5"><center>Tidak ada data</center></td>
+                                            <td colspan="6"><center>Tidak ada data</center></td>
                                         </tr>
                                     @endif
                                 </tbody>
