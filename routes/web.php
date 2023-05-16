@@ -31,6 +31,7 @@ Route::group(['middleware' => 'cekLogin'], function () {
     Route::delete('/hapuswarga/id/{id}', [DashboardController::class, 'hapuswarga'])->name('warga.delete');
     Route::get('/detail/{id}', [DashboardController::class, 'detail'])->name('warga.detail');
 
+    // Ajax ambil data nik
     Route::get('/nik/{nik}', [DashboardController::class, 'nik']);
     // Halaman pekerjaan
     Route::prefix('pekerjaan')->group(function () {

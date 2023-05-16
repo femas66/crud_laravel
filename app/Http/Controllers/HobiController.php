@@ -60,7 +60,7 @@ class HobiController extends Controller
     }
     function delete(HobiWarga $id)
     {
-
+        // dd($id);
         $id->delete();
         return redirect()->route('hobi.index')->with('msg', 'Berhasil hapus data');
     }

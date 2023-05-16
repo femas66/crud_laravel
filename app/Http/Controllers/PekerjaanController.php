@@ -37,7 +37,7 @@ class PekerjaanController extends Controller
         $data = $request->validate([
             'warga_id' => 'required',
             'pekerjaan' => 'required|min:3|alpha_spaces',
-            'alamat' => 'required|min:5',
+            'alamat' => 'required|string|min:5',
             'gaji' => 'required|numeric'
         ], [
             'warga_id.required' => 'Belum ada data warga'
@@ -57,7 +57,7 @@ class PekerjaanController extends Controller
         $data = $request->validate([
             'warga_id' => 'required',
             'pekerjaan' => 'required|min:3|alpha_spaces',
-            'alamat' => 'required|min:5',
+            'alamat' => 'required|string|min:5',
             'gaji' => 'required|numeric'
         ]);
         PekerjaanWarga::find($id)->update($data);

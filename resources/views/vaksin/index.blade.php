@@ -122,7 +122,7 @@
                                 </thead>
                                 <tbody>
                                     <script>
-                                        function konfirmasiHapus(event) {
+                                        function konfirmasiHapus(event, id) {
                                             event.preventDefault(); // Menghentikan submit form
 
                                             Swal.fire({
@@ -137,7 +137,7 @@
                                             }).then((result) => {
                                                 if (result.isConfirmed) {
                                                 // Kode untuk melakukan penghapusan data di sini
-                                                document.getElementById("myForm").submit(); // Melanjutkan submit form setelah konfirmasi
+                                                document.getElementById("myForm-" + id).submit(); // Melanjutkan submit form setelah konfirmasi
                                                 }
                                             });
                                         }
@@ -154,7 +154,7 @@
                                             <th><a href="{{ route('vaksin.edit', ['id' => $vaksin->id]) }}"
                                                     class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>
                                                     Edit</a></th>
-                                                    <th><form method="post" action="{{ route('vaksin.delete', ['id' => $vaksin->id]) }}" onsubmit="konfirmasiHapus(event)" id="myForm"><button class="btn btn-danger" type="submit" >@csrf @method('DELETE')<i class="fa-solid fa-trash"></i> Hapus</button></form></th>
+                                                    <th><form method="post" action="{{ route('vaksin.delete', ['id' => $vaksin->id]) }}" onsubmit="konfirmasiHapus(event, {{ $vaksin->id }})" id="myForm-{{ $vaksin->id }}"><button class="btn btn-danger" type="submit" >@csrf @method('DELETE')<i class="fa-solid fa-trash"></i> Hapus</button></form></th>
                                         </tr>
                                         @endforeach
                                     @else

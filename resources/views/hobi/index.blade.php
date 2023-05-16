@@ -120,7 +120,7 @@
                                 </thead>
                                 <tbody>
                                     <script>
-                                        function konfirmasiHapus(event) {
+                                        function konfirmasiHapus(event, id) {
                                             event.preventDefault(); // Menghentikan submit form
 
                                             Swal.fire({
@@ -135,7 +135,7 @@
                                             }).then((result) => {
                                                 if (result.isConfirmed) {
                                                 // Kode untuk melakukan penghapusan data di sini
-                                                document.getElementById("myForm").submit(); // Melanjutkan submit form setelah konfirmasi
+                                                document.getElementById("myForm-" + id).submit(); // Melanjutkan submit form setelah konfirmasi
                                                 }
                                             });
                                         }
@@ -149,7 +149,7 @@
                                             <td>{{ $hobi->hobi }}</td>
                                             <th><a href="{{ route('hobi.edit', ['id' => $hobi->id]) }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i> Edit</a></th>
                                             <th>
-                                                <form method="post" action="{{ route('hobi.delete', ['id' => $hobi->id]) }}" id="myForm" onsubmit="konfirmasiHapus(event)">
+                                                <form method="post" action="{{ route('hobi.delete', ['id' => $hobi->id]) }}" id="myForm-{{ $hobi->id }}" onsubmit="konfirmasiHapus(event, {{ $hobi->id }})">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i> Hapus</button>

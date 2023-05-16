@@ -111,7 +111,7 @@
                                 </thead>
                                 <tbody>
                                     <script>
-                                        function konfirmasiHapus(event) {
+                                        function konfirmasiHapus(event, id) {
                                             event.preventDefault(); // Menghentikan submit form
 
                                             Swal.fire({
@@ -126,7 +126,7 @@
                                             }).then((result) => {
                                                 if (result.isConfirmed) {
                                                 // Kode untuk melakukan penghapusan data di sini
-                                                document.getElementById("myForm").submit(); // Melanjutkan submit form setelah konfirmasi
+                                                document.getElementById("myForm-" + id).submit(); // Melanjutkan submit form setelah konfirmasi
                                                 }
                                             });
                                         }
@@ -139,10 +139,16 @@
                                                     height="80"></td>
                                             <td>{{ $agama->warga->nama }}</td>
                                             <td>{{ $agama->agama_sekarang }}</td>
-                                            <th><a href="{{ route('agama.edit', ['id' => $agama->id]) }}"
-                                                    class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>
-                                                    Edit</a></th>
-                                                    <th><form method="post" action="{{ route('agama.delete', ['id' => $agama->id]) }}" id="myForm" onsubmit="konfirmasiHapus(event)"><button class="btn btn-danger" type="submit">@csrf @method('DELETE')<i class="fa-solid fa-trash"></i> Hapus</button></form></th>
+                                            <th>
+                                                <a href="{{ route('agama.edit', ['id' => $agama->id]) }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                                            </th>
+                                            <th>
+                                                <form method="post" action="{{ route('agama.delete', ['id' => $agama->id]) }}" id="myForm-{{ $agama->id }}" onsubmit="konfirmasiHapus(event, {{ $agama->id }})">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i> Hapus</button>
+                                                </form>
+                                            </th>
                                         </tr>
                                         @endforeach
                                     @else

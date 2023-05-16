@@ -72,11 +72,11 @@ class DashboardController extends Controller
             'foto' => 'required|file|mimes:jpg,jpeg,png|max:5120',
             'nik' => 'required|unique:warga,nik|numeric|digits_between:10,9999999999|',
             'jenis_kelamin' => 'required',
-            'tanggal_lahir' => 'required'
+            'tanggal_lahir' => 'required|date|after:1900-01-01|before:2023-05-05'
         ],[
             'nik.digits_between' => 'NIK minimal 10 digit',
             'nama.alpha_spaces' => 'Nama tidak boleh ada angka',
-            'foto.max' => 'Maksimal 5MB'
+            'foto.max' => 'Maksimal 5MB',
         ]);
         $file = $request->file('foto');
         $name = $file->hashName();
@@ -100,7 +100,7 @@ class DashboardController extends Controller
                 'foto' => 'required|mimes:jpeg,png,jpg|max:5120',
                 'nik' => 'required|numeric|digits_between:10,9999999999|unique:warga,nik,' . $re->id,
                 'jenis_kelamin' => 'required',
-                'tanggal_lahir' => 'required'
+                'tanggal_lahir' => 'required|date|after:1900-01-01|before:2023-05-05',
             ],[
                 'nik.digits_between' => 'NIK minimal 10 digit',
                 'nama.alpha_spaces' => 'Nama tidak boleh ada angka',
@@ -119,7 +119,7 @@ class DashboardController extends Controller
                 'nama' => 'required|max:255|min:3|alpha_spaces',
                 'nik' => 'required|digits_between:10,9999999999|unique:warga,nik,' . $re->id,
                 'jenis_kelamin' => 'required',
-                'tanggal_lahir' => 'required'
+                'tanggal_lahir' => 'required|date|after:1900-01-01|before:2023-05-05',
             ], [
                 'nama.alpha_spaces' => 'Nama tidak boleh ada angka',
             ]);
